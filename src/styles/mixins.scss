@@ -1,0 +1,38 @@
+@mixin mo {
+  width: 1280px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+// 弹性盒弹性项上下居中
+@mixin flex {
+  display: flex;
+  align-items: center;
+}
+
+// 等级和地区样式
+@mixin level-and-area {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 0;
+  color: gray;
+
+  dd {
+    margin-right: 20px;
+    margin-bottom: 16px;
+    cursor: pointer;
+
+    &:hover,
+    &.active {
+      color: #4993f2;
+    }
+  }
+}
+
+
+// 单行文本溢出显示 ...
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
