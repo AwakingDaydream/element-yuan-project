@@ -1,16 +1,125 @@
-// 设置通用变量、定义基本样式
+@use 'sass:color';
+
 :root {
-  --vt-c-white: #ffffff;
-  --vt-bg-color: #f0f0f0;
-  --vt-border-color: #d6d5d5;
-  --vt-border-disabled-color: #C7CFD5;
-  --vt-main-color: #000000;
-  --vt-card-bg-color: #dfdfdf;
-  --vt-dialog-bg-color: #ffffff;
-  --vt-dialog-model-bg-color: rgba(0,0,0,0.3);
-  --vt-carouse-bg-color: #1a1a1a;
-  --vt-main-bg-color: #007cdb;
-  --vt-main-danger-bg-color: #ff5a5a;
-  --vt-main-base-bg-color: #1c1d1e;
-  --vt-main-warning-bg-color: #b7b7b7;
+  /* colors基本样式 */
+  --vk-color-white: #ffffff;
+  --vk-color-black: mix(#000, #fff,  80%);
+  //$main-colors: (
+  //        primary: #409eff,
+  //        success: #67c23a,
+  //        warning: #e6a23c,
+  //        danger: #f56c6c,
+  //        info: #909399
+  //);
+
+  /*
+    @each: 相当于for in 对象循环，得到key，value 赋值
+    @for: 相当于数组循环,through包含最后一个条件 to则不包含最后一个条件
+  */
+  //@each $val, $color in $main-colors {
+  //  --vk-color-#{$val}: #{$color};
+  //  @each $i in (3,5,7,9){
+  //    --vk-color-#{$val}-light-#{$i}: mix(#fff,#000);
+  //  }
+  //  --vk-color-#{$val}-light-8: mix(#fff, $color,  90%);
+  //  --vk-color-#{$val}-dark-2: mix(#000, #fff,  80%);
+  //}
+
+  --vk-color-primary: #25D1BF;
+  --vk-color-primary-light-3: #4BDECA;
+  --vk-color-primary-light-5: #75EBD7;
+  --vk-color-primary-light-7: #A3F7E7;
+  --vk-color-primary-light-8: #D1FFF4;
+  --vk-color-primary-light-9: #E8FFF9;
+  --vk-color-primary-dark-2: #17B0A6;
+
+  --vk-color-success: #4F74EF;
+  --vk-color-success-light-3: #6C90F2;
+  --vk-color-success-light-5: #8EAEF7;
+  --vk-color-success-light-7: #B5CCFD;
+  --vk-color-success-light-8: #D4E2FE;
+  --vk-color-success-light-9: #EBF3FF;
+  --vk-color-success-dark-2: #3855C9;
+
+  --vk-color-warning: #FEBA26;
+  --vk-color-warning-light-3: #FFCC4A;
+  --vk-color-warning-light-5: #FFDD78;
+  --vk-color-warning-light-7: #FFEA9C;
+  --vk-color-warning-light-8: #FFF4C4;
+  --vk-color-warning-light-9: #FEFADD;
+  --vk-color-warning-dark-2: #DB981D;
+
+  --vk-color-danger: #F64753;
+  --vk-color-danger-light-3: #FF7377;
+  --vk-color-danger-light-5: #FF9C9C;
+  --vk-color-danger-light-7: #FFBCB9;
+  --vk-color-danger-light-8: #FFDEDC;
+  --vk-color-danger-light-9: #FFF1F0;
+  --vk-color-danger-dark-2: #CF3241;
+
+  --vk-color-info: #909399;
+  --vk-color-info-light-3: #FF7377;
+  --vk-color-info-light-5: #FF9C9C;
+  --vk-color-info-light-7: #FFBCB9;
+  --vk-color-info-light-8: #FFDEDC;
+  --vk-color-info-light-9: #FFF1F0;
+  --vk-color-dinfo-dark-2: #CF3241;
+
+  //基本样式
+  --vk-bg-color: #ffffff;
+  --vk-bg-color-page: #f2f3f5;
+  --vk-bg-color-overlay: #ffffff;
+  --vk-text-color-primary: #303133;
+  --vk-text-color-regular: #606266;
+  --vk-text-color-secondary: #909399;
+  --vk-text-color-placeholder: #a8abb2;
+  --vk-text-color-disabled: #c0c4cc;
+  --vk-border-color: #dcdfe6;
+  --vk-border-color-light: #e4e7ed;
+  --vk-border-color-lighter: #ebeef5;
+  --vk-border-color-extra-light: #f2f6fc;
+  --vk-border-color-dark: #d4d7de;
+  --vk-border-color-darker: #cdd0d6;
+  --vk-fill-color: #f0f2f5;
+  --vk-fill-color-light: #f5f7fa;
+  --vk-fill-color-lighter: #fafafa;
+  --vk-fill-color-extra-light: #fafcff;
+  --vk-fill-color-dark: #ebedf0;
+  --vk-fill-color-darker: #e6e8eb;
+  --vk-fill-color-blank: #ffffff;
+
+  /* border */
+  --vk-border-width: 1px;
+  --vk-border-style: solid;
+  --vk-border-color-hover: var(--vk-text-color-disabled);
+  --vk-border: var(--vk-border-width) var(--vk-border-style) var(--vk-border-color);
+  --vk-border-radius-base: 4px;
+  --vk-border-radius-small: 2px;
+  --vk-border-radius-round: 20px;
+  --vk-border-radius-circle: 100%;
+
+  /*font*/
+  --vk-font-size-extra-large: 20px;
+  --vk-font-size-large: 18px;
+  --vk-font-size-medium: 16px;
+  --vk-font-size-base: 14px;
+  --vk-font-size-small: 13px;
+  --vk-font-size-extra-small: 12px;
+  --vk-font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5fae\8f6f\96c5\9ed1", Arial, sans-serif;
+  --vk-font-weight-primary: 500;
+
+  /*disabled*/
+  --vk-disabled-bg-color: var(--vk-fill-color-light);
+  --vk-disabled-text-color: var(--vk-text-color-placeholder);
+  --vk-disabled-border-color: var(--vk-border-color-light);
+
+  /*animation*/
+  --vk-transition-duration: .3s;
+  --vk-transition-duration-fast: .2s;
+
+  --vk-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, .04), 0px 8px 20px rgba(0, 0, 0, .08);
+  --vk-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, .12);
+  --vk-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, .12);
+  --vk-box-shadow-dark: 0px 16px 48px 16px rgba(0, 0, 0, .08), 0px 12px 32px rgba(0, 0, 0, .12), 0px 8px 16px -8px rgba(0, 0, 0, .16);
+
 }
