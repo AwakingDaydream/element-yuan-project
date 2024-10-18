@@ -1,6 +1,10 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+/*
+	vite-plugin-vue-setup-extend 使用script标签直接定义name + defineProps直接定义 会报错
+* */
+// import VueSetuoExtend from 'vite-plugin-vue-setup-extend';
 // import eslint from 'vite-plugin-eslint';
 
 import path from 'path';

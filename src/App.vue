@@ -1,10 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Button from '@/components/Button/Button.vue';
+</script>
 
 <template>
 	<header>
-		<img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-		<div class="wrapper">1</div>
+		<Button type="success" plain round circle size="large" autofocus>vk-button</Button>
 	</header>
 
 	<main></main>

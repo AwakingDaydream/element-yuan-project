@@ -6,4 +6,26 @@
  *  circle 原型按钮 boolean
  *  size 按钮大小 small normal large
  *  disabled 禁用 boolean
+ * 	nativeType 按钮操作类型
+ *  autofocus 自动获取焦点
  */
+
+/*固定字面量*/
+export type ButtonType = 'primary' | 'success' | 'warning' | 'danger' | 'info';
+export type ButtonSize = 'large' | 'small';
+export type NativeType = 'button' | 'submit' | 'reset';
+
+export interface ButtonProps {
+	type?: ButtonType;
+	size?: ButtonSize;
+	plain?: boolean;
+	round?: boolean;
+	circle?: boolean;
+	disabled?: boolean;
+	nativeType?: NativeType;
+	autofocus?: boolean;
+}
+
+export interface ButtonInstance {
+	ref: HTMLButtonElement;
+}
