@@ -4,66 +4,28 @@
   /* colors基本样式 */
   --vk-color-white: #ffffff;
   --vk-color-black: mix(#000, #fff,  80%);
-  //$main-colors: (
-  //        primary: #409eff,
-  //        success: #67c23a,
-  //        warning: #e6a23c,
-  //        danger: #f56c6c,
-  //        info: #909399
-  //);
+
+  $main-colors: (
+          primary: #409eff,
+          success: #67c23a,
+          warning: #e6a23c,
+          danger: #f56c6c,
+          info: #909399
+  );
 
   /*
     @each: 相当于for in 对象循环，得到key，value 赋值
     @for: 相当于数组循环,through包含最后一个条件 to则不包含最后一个条件
+    需要安装postcss-color-mix 不然mix函数无法使用
   */
-  //@each $val, $color in $main-colors {
-  //  --vk-color-#{$val}: #{$color};
-  //  @each $i in (3,5,7,9){
-  //    --vk-color-#{$val}-light-#{$i}: mix(#fff,#000);
-  //  }
-  //  --vk-color-#{$val}-light-8: mix(#fff, $color,  90%);
-  //  --vk-color-#{$val}-dark-2: mix(#000, #fff,  80%);
-  //}
-
-  --vk-color-primary: #25D1BF;
-  --vk-color-primary-light-3: #4BDECA;
-  --vk-color-primary-light-5: #75EBD7;
-  --vk-color-primary-light-7: #A3F7E7;
-  --vk-color-primary-light-8: #D1FFF4;
-  --vk-color-primary-light-9: #E8FFF9;
-  --vk-color-primary-dark-2: #17B0A6;
-
-  --vk-color-success: #4F74EF;
-  --vk-color-success-light-3: #6C90F2;
-  --vk-color-success-light-5: #8EAEF7;
-  --vk-color-success-light-7: #B5CCFD;
-  --vk-color-success-light-8: #D4E2FE;
-  --vk-color-success-light-9: #EBF3FF;
-  --vk-color-success-dark-2: #3855C9;
-
-  --vk-color-warning: #FEBA26;
-  --vk-color-warning-light-3: #FFCC4A;
-  --vk-color-warning-light-5: #FFDD78;
-  --vk-color-warning-light-7: #FFEA9C;
-  --vk-color-warning-light-8: #FFF4C4;
-  --vk-color-warning-light-9: #FEFADD;
-  --vk-color-warning-dark-2: #DB981D;
-
-  --vk-color-danger: #F64753;
-  --vk-color-danger-light-3: #FF7377;
-  --vk-color-danger-light-5: #FF9C9C;
-  --vk-color-danger-light-7: #FFBCB9;
-  --vk-color-danger-light-8: #FFDEDC;
-  --vk-color-danger-light-9: #FFF1F0;
-  --vk-color-danger-dark-2: #CF3241;
-
-  --vk-color-info: #909399;
-  --vk-color-info-light-3: #FF7377;
-  --vk-color-info-light-5: #FF9C9C;
-  --vk-color-info-light-7: #FFBCB9;
-  --vk-color-info-light-8: #FFDEDC;
-  --vk-color-info-light-9: #FFF1F0;
-  --vk-color-dinfo-dark-2: #CF3241;
+  @each $val, $color in $main-colors {
+    --vk-color-#{$val}: #{$color};
+    @each $i in (3,5,7,9){
+      --vk-color-#{$val}-light-#{$i}: mix(#ffffff,#{$color},#{$i*0.1});
+    }
+    --vk-color-#{$val}-light-8: mix(#ffffff,#{$color},80%);
+    --vk-color-#{$val}-dark-2: mix(#000000,#{$color},20%);
+  }
 
   //基本样式
   --vk-bg-color: #ffffff;

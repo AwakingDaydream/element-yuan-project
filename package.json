@@ -34,6 +34,7 @@
     "node-sass": "^9.0.0",
     "npm-run-all2": "^6.2.3",
     "path-browserify": "^1.0.1",
+    "postcss-color-mix": "^1.1.0",
     "prettier": "^3.3.3",
     "sass": "^1.60.0",
     "sass-loader": "^10.5.2",
