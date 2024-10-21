@@ -19,4 +19,5 @@ export interface CollapseContext {
 	activeNames: Ref<NameType[]>;
 	handleItemClick: (name: NameType) => void;
 }
+// 保证定义的类型不会报错
 export const collapseContextKey: InjectionKey<CollapseContext> = Symbol('collapseContextKey');

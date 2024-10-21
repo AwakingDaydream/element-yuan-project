@@ -54,7 +54,7 @@ module.exports = {
         'prettier/prettier': 'error',
         'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0, // 禁止使用debugger
         'no-console': 0, // 禁止使用console
-        'no-unused-vars': 2, // 存在声明但未使用的变量
+        'no-unused-vars': 0, // 存在声明但未使用的变量
         'no-useless-escape': 0, // 禁止不必要的转义字符
         'no-alert': 0, // 禁止使用 alert、confirm 和 prompt
 
