@@ -1,4 +1,5 @@
 <template>
+	<img src="@/assets/images/miku.gif" />
 	<h1>Button</h1>
 	<h3>type</h3>
 	<div>
@@ -38,7 +39,8 @@
 	</div>
 
 	<h1 style="margin-top: 50px">Collapse</h1>
-	<vkCollapse>
+	---{{ modelValue }}---
+	<vkCollapse v-model="modelValue">
 		<vkCollapseItem name="a" title="a"> about a </vkCollapseItem>
 		<vkCollapseItem name="b">
 			<template #title>title b</template>
@@ -55,6 +57,9 @@
 import vkButton from '@/components/Button/Button.vue';
 import vkCollapse from '@/components/Collapse/Collapse.vue';
 import vkCollapseItem from '@/components/Collapse/CollapseItem.vue';
+import { ref } from 'vue';
+
+const modelValue = ref(['a']);
 </script>
 
 <style scoped lang="scss"></style>

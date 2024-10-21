@@ -11,14 +11,14 @@
 </template>
 
 <script setup lang="ts">
-import type { CollapseProps } from './types';
+import type { CollapseItemProps } from './types';
 import { inject, computed } from 'vue';
 import { collapseContextKey } from './types';
 
 defineOptions({
 	name: 'VkCollapseItem', //定义组件名
 });
-const props = defineProps<CollapseProps>();
+const props = defineProps<CollapseItemProps>();
 const collapseContext = inject(collapseContextKey);
 const isActive = computed(() => collapseContext?.activeNames.value.includes(props.name));
 

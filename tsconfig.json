@@ -8,7 +8,6 @@
     "strictFunctionTypes": false,
     "strict": false,
     "jsx": "preserve",
-    "baseUrl": ".",
     "allowJs": true,
     "sourceMap": true,
     "isolatedModules": true,
@@ -22,9 +21,9 @@
     "skipLibCheck": true,
     "types": ["vite/client", "element-plus/global"],
     "removeComments": true,
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "#/*": ["types/*"]
+      "@/*": ["./src/*"]
     }
   },
   "files": [
