@@ -40,17 +40,19 @@
 
 	<h1 style="margin-top: 50px">Collapse</h1>
 	---{{ modelValue }}---
-	<vkCollapse v-model="modelValue">
-		<vkCollapseItem name="a" title="a"> about a </vkCollapseItem>
-		<vkCollapseItem name="b">
-			<template #title>title b</template>
-			about b
-		</vkCollapseItem>
-		<vkCollapseItem name="c">
-			<template #title>title c</template>
-			about c
-		</vkCollapseItem>
-	</vkCollapse>
+	<div style="width: 200px; margin: 50px">
+		<vkCollapse v-model="modelValue">
+			<vkCollapseItem name="a" title="a"> about a </vkCollapseItem>
+			<vkCollapseItem name="b">
+				<template #title>title b</template>
+				about b
+			</vkCollapseItem>
+			<vkCollapseItem name="c">
+				<template #title>title c</template>
+				about c
+			</vkCollapseItem>
+		</vkCollapse>
+	</div>
 </template>
 
 <script setup lang="ts">
