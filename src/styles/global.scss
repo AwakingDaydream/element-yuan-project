@@ -1,3 +1,6 @@
-@import "./reset.scss";
-@import "./vars.scss";
-@import "@/components/Button/style.scss";
+/*
+  sass1.8.0之后需要使用use引入
+*/
+@use "./reset.scss";
+@use "./vars.scss";
+@use "@/components/Button/style.scss";

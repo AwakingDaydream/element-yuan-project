@@ -29,7 +29,8 @@ export default defineConfig({
 		preprocessorOptions: {
 			// 这里配置 mixin.scss 混合文件的全局引入
 			scss: {
-				additionalData: '@import "@/styles/mixins.scss";',
+				api: 'modern-compiler',
+				additionalData: '@use "@/styles/mixins.scss";',
 			},
 		},
 	},

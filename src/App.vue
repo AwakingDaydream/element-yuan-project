@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import vkButton from '@/components/Button/Button.vue';
+import vkCollapse from '@/components/Collapse/Collapse.vue';
 </script>
 
 <template>
@@ -39,6 +40,8 @@ import vkButton from '@/components/Button/Button.vue';
 		<vk-button type="danger" disabled>vk-button</vk-button>
 		<vk-button type="info" disabled>vk-button</vk-button>
 	</div>
+
+	<vkCollapse />
 </template>
 
 <style scoped lang="scss"></style>
