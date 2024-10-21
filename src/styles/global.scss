@@ -1,6 +1,8 @@
 /*
   sass1.8.0之后需要使用use引入
+  as * 代表只导入 scss 文件中的所有内容
 */
-@use "./reset.scss";
-@use "./vars.scss";
-@use "@/components/Button/style.scss";
+@use "./reset.scss" as *;
+@use "./vars.scss" as *;
+@use "../components/Button/style.scss" as *;
+@use "../components/Collapse/style.scss" as *;
