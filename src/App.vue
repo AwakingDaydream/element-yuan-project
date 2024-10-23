@@ -53,6 +53,8 @@
 			</vkCollapseItem>
 		</vkCollapse>
 	</div>
+
+	<font-awesome-icon icon="fa-solid fa-user-secret"></font-awesome-icon>
 </template>
 
 <script setup lang="ts">
