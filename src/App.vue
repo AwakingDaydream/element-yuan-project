@@ -37,17 +37,23 @@
 		<vk-button type="danger" disabled>vk-button</vk-button>
 		<vk-button type="info" disabled>vk-button</vk-button>
 	</div>
+	<h3>icon</h3>
+	<div>
+		<vk-button disabled>vk-button</vk-button>
+		<vk-button size="small" loading>vk-button</vk-button>
+		<vk-button size="large" icon="arrow-up">vk-button</vk-button>
+	</div>
 
 	<h1 style="margin-top: 50px">Collapse</h1>
 	---{{ modelValue }}---
 	<div style="width: 200px; margin: 50px">
-		<vkCollapse v-model="modelValue">
+		<vkCollapse v-model="modelValue" accordion>
 			<vkCollapseItem name="a" title="a"> about a </vkCollapseItem>
 			<vkCollapseItem name="b">
 				<template #title>title b</template>
 				about b
 			</vkCollapseItem>
-			<vkCollapseItem name="c">
+			<vkCollapseItem name="c" disabled>
 				<template #title>title c</template>
 				about c
 			</vkCollapseItem>

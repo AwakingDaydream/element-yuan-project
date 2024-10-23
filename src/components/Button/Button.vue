@@ -8,11 +8,14 @@
 			'is-round': round,
 			'is-circle': circle,
 			'is-disabled': disabled,
+			'is-loading': loading,
 		}"
-		:disabled="disabled"
+		:disabled="disabled || loading"
 		:autofocus="autofocus"
 		:type="nativeType"
 	>
+		<vk-icon icon="spinner" spin v-if="loading" />
+		<vk-icon :icon="icon" v-if="icon" />
 		<span>
 			<slot />
 		</span>
@@ -22,6 +25,7 @@
 <script setup lang="ts">
 import type { ButtonProps, ButtonInstance } from './types';
 import { ref } from 'vue';
+import vkIcon from '@/components/Icon/Icon.vue';
 const _ref = ref<ButtonInstance>();
 defineOptions({
 	name: 'VkButton', //定义组件名

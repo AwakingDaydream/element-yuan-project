@@ -8,6 +8,8 @@
  *  disabled 禁用 boolean
  * 	nativeType 按钮操作类型
  *  autofocus 自动获取焦点
+ *  loading 正在加载
+ *  icon 图标
  */
 
 /*固定字面量*/
@@ -24,6 +26,8 @@ export interface ButtonProps {
 	disabled?: boolean;
 	nativeType?: NativeType;
 	autofocus?: boolean;
+	loading?: boolean;
+	icon?: string;
 }
 
 export interface ButtonInstance {

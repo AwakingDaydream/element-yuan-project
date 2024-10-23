@@ -81,7 +81,10 @@
     padding: 8px;
   }
 
-  // 禁用样式
+  /*
+    禁用样式
+    &[attribute=value]  ：表示选择具有特定属性和属性值的元素
+  */
   &.is-disabled, &.is-disabled:hover, &.is-disabled:focus,
   &[disabled], &[disabled]:hover, &[disabled]:focus
   {
@@ -90,6 +93,16 @@
     background-image: none;
     background-color: var(--vk-button-disabled-bg-color);
     border-color: var(--vk-button-disabled-border-color);
+  }
+
+  /* 通配符
+    [attribute^=value]，a[src^="https"]，选择其 src 属性值以 "https" 开头的每个 <a> 元素。
+    [attribute*=value]，a[src*="abc"]，选择其 src 属性中包含 "abc" 子串的每个 <a> 元素。
+    [attribute*=value]，a[src$="abc"]，选择其 src 属性中值以 "abc" 结尾的每个 <a> 元素。
+    用[class*=" icon-"], [class^=icon-]经过测试发现，value可以加双引号，可以不加，效果一致。
+  */
+  [class*=vk-icon] +span{
+    margin-left: 6px;
   }
 }
 
@@ -131,6 +144,9 @@
   padding: 12px 19px;
   font-size: var(--vk-font-size-base);
   border-radius: var(--vk-border-radius-base);
+  [class*=vk-icon] .svg-inline--fa{
+    height: var(--vk-font-size-base);
+  }
 }
 .vk-button--small {
   --vk-button-size: 24px;
@@ -138,4 +154,7 @@
   padding: 5px 11px;
   font-size: 12px;
   border-radius: calc(var(--vk-border-radius-base) - 1px);
+  [class*=vk-icon] .svg-inline--fa{
+    height: 12px;
+  }
 }

@@ -11,6 +11,7 @@
 		>
 			<!--具名插槽，没有传入插槽时取title-->
 			<slot name="title">{{ title }}</slot>
+			<vk-icon class="header-angle" icon="angle-right" />
 		</div>
 		<Transition name="slide" v-on="transitionEvents">
 			<div class="vk-collapse-item__wrap" v-show="isActive">
@@ -26,6 +27,7 @@
 import type { CollapseItemProps } from './types';
 import { inject, computed } from 'vue';
 import { collapseContextKey } from './types';
+import vkIcon from '@/components/Icon/Icon.vue';
 
 defineOptions({
 	name: 'VkCollapseItem', //定义组件名

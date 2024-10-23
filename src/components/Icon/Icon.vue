@@ -5,6 +5,7 @@
 			[`vk-icon--${type}`]: type,
 		}"
 		:style="customStyles"
+		v-bind="$attrs"
 	>
 		<!--透传props 让定义的props直接由外部icon组件继承，v-bind接受对象形式props的所有响应式属性-->
 		<FontAwesomeIcon v-bind="filterProps" />
