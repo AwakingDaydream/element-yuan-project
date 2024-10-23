@@ -11,6 +11,23 @@
   --vk-collapse-disabled-border-color: var(--vk-border-color-lighter);
   border-top: 1px solid var(--vk-collapse-border-color);
   border-bottom: 1px solid var(--vk-collapse-border-color);
+  //消除最后一个border-bottom
+  &-item:last-child{
+    .vk-collapse-item__header{
+      border-bottom: transparent;
+    }
+    .vk-collapse-item__content{
+      border-bottom: transparent;
+    }
+  }
+
+  /*
+    first-child：这个选择器会选中其父元素的第一个子元素，不论这个子元素是什么类型的标签。例如，p:first-child会选中每个父元素的第一个子元素，只要这个子元素是<p>标签。
+    first-of-type：这个选择器会选中其父元素的第一个特定类型的子元素。例如，p:first-of-type会选中每个父元素的第一个<p>元素，不论这个<p>元素在其兄弟元素中的位置如何。
+    .vk-collapse-item__header:first-child{
+      background: red;
+    }
+  */
 }
 .vk-collapse-item__header {
   display: flex;
