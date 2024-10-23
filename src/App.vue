@@ -55,7 +55,7 @@
 	</div>
 
 	<h1 style="margin-top: 50px">Icon</h1>
-	<vk-icon icon="fa-user-secret" size="4x"></vk-icon>
+	<vk-icon icon="fa-user-secret" :size="size" type="danger" color="#000000"></vk-icon>
 </template>
 
 <script setup lang="ts">
@@ -66,6 +66,11 @@ import vkIcon from '@/components/Icon/Icon.vue';
 import { ref } from 'vue';
 
 const modelValue = ref(['a']);
+const size = ref<any>('2x');
+
+setTimeout(() => {
+	size.value = '5x';
+}, 2000);
 </script>
 
 <style scoped lang="scss"></style>
