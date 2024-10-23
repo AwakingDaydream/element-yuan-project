@@ -54,13 +54,15 @@
 		</vkCollapse>
 	</div>
 
-	<font-awesome-icon icon="fa-solid fa-user-secret"></font-awesome-icon>
+	<h1 style="margin-top: 50px">Icon</h1>
+	<vk-icon icon="fa-user-secret" size="4x"></vk-icon>
 </template>
 
 <script setup lang="ts">
 import vkButton from '@/components/Button/Button.vue';
 import vkCollapse from '@/components/Collapse/Collapse.vue';
 import vkCollapseItem from '@/components/Collapse/CollapseItem.vue';
+import vkIcon from '@/components/Icon/Icon.vue';
 import { ref } from 'vue';
 
 const modelValue = ref(['a']);

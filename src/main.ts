@@ -13,12 +13,11 @@ import '@/styles/global.scss';
  * 全局注册 FontAwesomeIcon 组件
  */
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons'; //免费图标库
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faUserSecret);
+import { fas } from '@fortawesome/free-solid-svg-icons'; //免费图标库
+library.add(fas); //注册所有图标
 
 const app = createApp(App);
 
 app.use(createPinia());
 
-app.component('FontAwesomeIcon', FontAwesomeIcon).mount('#app');
+app.mount('#app');
