@@ -74,8 +74,10 @@
 // 每种样式重新赋值
 @each $val in success,warning,info,danger {
   .vk-alert--#{$val} {
-    --vk-alert-color: var(--vk-color-#{$val});
-    --vk-alert-bg-color: var(--vk-color-#{$val}-light-9);
+    &.is-light{
+      --vk-alert-color: var(--vk-color-#{$val});
+      --vk-alert-bg-color: var(--vk-color-#{$val}-light-9);
+    }
     &.is-dark{
       --vk-alert-color: var(--vk-color-white);
       --vk-alert-bg-color: var(--vk-color-#{$val});
