@@ -62,6 +62,24 @@
 
 	<h1 style="margin-top: 50px">Icon</h1>
 	<vk-icon icon="fa-user-secret" :size="size" type="danger" color="#000000"></vk-icon>
+
+	<h1 style="margin-top: 50px">Alert</h1>
+	<div style="width: 300px">
+		<vk-alert title="default alert" type="info" show-icon closable center />
+		<vk-alert title="default alert" type="warning" show-icon closable close-text="Gotcha" />
+		<vk-alert title="default alert" type="danger" show-icon />
+		<vk-alert title="Success Alert" type="success" show-icon>
+			<template #title> Success Alert </template>
+			<template #description>这是一串描述</template>
+		</vk-alert>
+
+		<vk-alert title="default alert" type="info" effect="dark" show-icon description="This is a description." closable />
+		<vk-alert title="default alert" type="warning" effect="dark" show-icon />
+		<vk-alert title="default alert" type="danger" effect="dark" show-icon />
+		<vk-alert title="Success Alert" type="success" effect="dark" show-icon>
+			<template #title> Success Alert </template>
+		</vk-alert>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -69,6 +87,7 @@ import vkButton from '@/components/Button/Button.vue';
 import vkCollapse from '@/components/Collapse/Collapse.vue';
 import vkCollapseItem from '@/components/Collapse/CollapseItem.vue';
 import vkIcon from '@/components/Icon/Icon.vue';
+import vkAlert from '@/components/Alert/Alert.vue';
 import { ref } from 'vue';
 
 const modelValue = ref(['a']);

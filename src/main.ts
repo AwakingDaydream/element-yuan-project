@@ -19,7 +19,8 @@ import '@/styles/global.scss';
  */
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons'; //免费图标库
-library.add(fas); //注册所有图标
+import { far } from '@fortawesome/free-regular-svg-icons';
+library.add(fas, far); //注册所有图标
 
 const app = createApp(App);
 
