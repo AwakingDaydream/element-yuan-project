@@ -1,5 +1,6 @@
 <template>
-	<img src="@/assets/images/miku.gif" />
+	<img src="@/assets/images/miku.gif" ref="triggerNode" />
+	<div ref="overlayNode">hello miku</div>
 	<h1>Button</h1>
 	<h3>type</h3>
 	<div>
@@ -88,11 +89,26 @@ import vkCollapse from '@/components/Collapse/Collapse.vue';
 import vkCollapseItem from '@/components/Collapse/CollapseItem.vue';
 import vkIcon from '@/components/Icon/Icon.vue';
 import vkAlert from '@/components/Alert/Alert.vue';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { createPopper } from '@popperjs/core';
+import type { Instance } from '@popperjs/core';
 
 const modelValue = ref(['a']);
 const size = ref<any>('2x');
+const overlayNode = ref<HTMLElement>();
+const triggerNode = ref<HTMLElement>();
+let popperInstance: Instance | null = null;
 
+onMounted(() => {
+	if (overlayNode.value && triggerNode.value) {
+		popperInstance = createPopper(triggerNode.value, overlayNode.value, {
+			placement: 'right',
+		});
+		popperInstance.setOptions({
+			placement: '' + '',
+		});
+	}
+});
 setTimeout(() => {
 	size.value = '5x';
 }, 2000);
