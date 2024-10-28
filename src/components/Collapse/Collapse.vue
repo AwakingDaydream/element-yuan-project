@@ -41,6 +41,8 @@ function handleItemClick(item: NameType) {
 		}
 	}
 
+	activeNames.value = _item;
+
 	emits('update:modelValue', _item);
 	// 抛出change方法使用
 	emits('change', _item);

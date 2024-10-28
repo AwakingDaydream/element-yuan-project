@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import VueMacros from 'unplugin-vue-macros';
+import { fileURLToPath, URL } from 'node:url';
 /*
 	vite-plugin-vue-setup-extend 使用script标签直接定义name + defineProps 会报错
 * */
@@ -11,11 +13,18 @@ import path from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
-	plugins: [vue(), vueJsx()],
+	plugins: [
+		VueMacros.vite({
+			plugins: {
+				vue: vue(),
+				vueJsx: vueJsx(),
+			},
+		}),
+	],
 	resolve: {
 		alias: {
 			//地址替换为@
-			'@': path.resolve(__dirname, './src'),
+			'@': fileURLToPath(new URL('./src', import.meta.url)),
 		},
 	},
 	server: {
