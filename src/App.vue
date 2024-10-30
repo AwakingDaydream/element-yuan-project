@@ -100,7 +100,7 @@ import vkTooltip from '@/components/Tooltip/Tooltip.vue';
 
 const modelValue = ref(['a']);
 const size = ref<any>('2x');
-const trigger = ref<any>('hover');
+const trigger = ref<any>('click');
 const overlayNode = ref<HTMLElement>();
 const triggerNode = ref<HTMLElement>();
 let popperInstance: Instance | null = null;

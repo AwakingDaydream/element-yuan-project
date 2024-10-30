@@ -1,5 +1,5 @@
 <template>
-	<div class="vk-tooltip" style="display: inline-block" v-on="outsideEvent">
+	<div ref="popperContainerNode" class="vk-tooltip" style="display: inline-block" v-on="outsideEvent">
 		<div class="vk-tooltip__trigger" v-on="event" ref="triggerNode">
 			<slot />
 		</div>
@@ -14,6 +14,7 @@ import type { TooltipEmits, TooltipProps } from './types';
 import { createPopper } from '@popperjs/core';
 import type { Instance } from '@popperjs/core';
 import { ref, watch } from 'vue';
+import useClickOutside from '@/hooks/useClickOutside';
 defineOptions({
 	name: 'VkTooltip', //定义组件名
 });
@@ -25,9 +26,17 @@ const emits = defineEmits<TooltipEmits>();
 const isOpen = ref(false);
 const popperNode = ref<HTMLElement>();
 const triggerNode = ref<HTMLElement>();
+const popperContainerNode = ref<HTMLElement>();
 let popperInstance: Instance | null = null;
+//v-on事件绑定不需要响应式对象
 let event = {};
 let outsideEvent = {};
+//点击操作 点击外部dom隐藏
+useClickOutside(popperContainerNode, () => {
+	if (props.trigger === 'click' && isOpen.value) {
+		isOpen.value = false;
+	}
+});
 
 // 根据trigger绑定事件
 const togglePopper = (_type) => {
