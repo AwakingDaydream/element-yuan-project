@@ -1,6 +1,6 @@
 <template>
-	<div class="vk-tooltip" style="display: inline-block">
-		<div class="vk-tooltip__trigger" ref="triggerNode" @click="togglePopper">
+	<div class="vk-tooltip" style="display: inline-block" v-on="outsideEvent">
+		<div class="vk-tooltip__trigger" v-on="event" ref="triggerNode">
 			<slot />
 		</div>
 		<div class="vk-tooltip__popper" ref="popperNode" v-if="isOpen">
@@ -26,11 +26,35 @@ const isOpen = ref(false);
 const popperNode = ref<HTMLElement>();
 const triggerNode = ref<HTMLElement>();
 let popperInstance: Instance | null = null;
+let event = {};
+let outsideEvent = {};
 
-const togglePopper = () => {
-	isOpen.value = !isOpen.value;
-	emits('visible-change', isOpen.value);
+// 根据trigger绑定事件
+const togglePopper = (_type) => {
+	const _isEnter = _type === 'hover-enter';
+	const _isClick = _type === 'click';
+	return () => {
+		isOpen.value = _isClick ? !isOpen.value : _isEnter;
+		emits('visible-change', isOpen.value);
+	};
 };
+const attachEvents = () => {
+	if (props.trigger === 'hover') {
+		event['mouseenter'] = togglePopper('hover-enter');
+		outsideEvent['mouseleave'] = togglePopper('hover-leave');
+	} else if (props.trigger === 'click') {
+		event['click'] = togglePopper('click');
+	}
+};
+watch(
+	() => props.trigger,
+	() => {
+		outsideEvent = {};
+		event = {};
+		attachEvents();
+	},
+	{ immediate: true }
+);
 
 watch(
 	isOpen,

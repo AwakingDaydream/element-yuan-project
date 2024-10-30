@@ -1,5 +1,10 @@
 <template>
-	<vkTooltip content="12345" placement="right"><template #content>123</template><img src="@/assets/images/miku.gif" ref="triggerNode" /></vkTooltip>
+	<vk-button :type="trigger === 'click' ? 'primary' : 'danger'" @click="trigger === 'click' ? (trigger = 'hover') : (trigger = 'click')"
+		>vk-button</vk-button
+	>
+	<vkTooltip content="12345" placement="right" :trigger="trigger"
+		><template #content>123</template><img src="@/assets/images/miku.gif" ref="triggerNode"
+	/></vkTooltip>
 	<h1>Button</h1>
 	<h3>type</h3>
 	<div>
@@ -95,6 +100,7 @@ import vkTooltip from '@/components/Tooltip/Tooltip.vue';
 
 const modelValue = ref(['a']);
 const size = ref<any>('2x');
+const trigger = ref<any>('hover');
 const overlayNode = ref<HTMLElement>();
 const triggerNode = ref<HTMLElement>();
 let popperInstance: Instance | null = null;
