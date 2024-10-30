@@ -1,10 +1,14 @@
 <template>
-	<vk-button :type="trigger === 'click' ? 'primary' : 'danger'" @click="trigger === 'click' ? (trigger = 'hover') : (trigger = 'click')"
-		>vk-button</vk-button
-	>
-	<vkTooltip content="12345" placement="right" :trigger="trigger"
-		><template #content>123</template><img src="@/assets/images/miku.gif" ref="triggerNode"
-	/></vkTooltip>
+	<vk-button :type="trigger === 'click' ? 'primary' : 'danger'" @click="trigger === 'click' ? (trigger = 'hover') : (trigger = 'click')">
+		trigger:{{ trigger }}
+	</vk-button>
+	<vkTooltip content="12345" placement="right" :trigger="trigger" ref="vkTooltipRef" :manual="manual">
+		<template #content>123</template>
+		<img src="@/assets/images/miku.gif" ref="triggerNode" />
+	</vkTooltip>
+	<vk-button @click="open">toolTipOpen</vk-button>
+	<vk-button @click="hide">toolTipClose</vk-button>
+	<vk-button @click="manual = !manual">manual:{{ manual }}</vk-button>
 	<h1>Button</h1>
 	<h3>type</h3>
 	<div>
@@ -93,31 +97,23 @@ import vkCollapse from '@/components/Collapse/Collapse.vue';
 import vkCollapseItem from '@/components/Collapse/CollapseItem.vue';
 import vkIcon from '@/components/Icon/Icon.vue';
 import vkAlert from '@/components/Alert/Alert.vue';
-import { onMounted, ref } from 'vue';
-import { createPopper } from '@popperjs/core';
-import type { Instance } from '@popperjs/core';
+import { ref } from 'vue';
 import vkTooltip from '@/components/Tooltip/Tooltip.vue';
+import type { TooltipInstance } from '@/components/Tooltip/types';
 
 const modelValue = ref(['a']);
 const size = ref<any>('2x');
 const trigger = ref<any>('click');
-const overlayNode = ref<HTMLElement>();
-const triggerNode = ref<HTMLElement>();
-let popperInstance: Instance | null = null;
+const manual = ref<any>(false);
+const vkTooltipRef = ref<TooltipInstance>();
 
-onMounted(() => {
-	if (overlayNode.value && triggerNode.value) {
-		popperInstance = createPopper(triggerNode.value, overlayNode.value, {
-			placement: 'right',
-		});
-		popperInstance.setOptions({
-			placement: '' + '',
-		});
-	}
-});
-setTimeout(() => {
-	size.value = '5x';
-}, 2000);
+function open() {
+	vkTooltipRef.value?.show();
+}
+
+function hide() {
+	vkTooltipRef.value?.hide();
+}
 </script>
 
 <style scoped lang="scss"></style>

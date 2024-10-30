@@ -10,10 +10,11 @@
 </template>
 
 <script setup lang="ts">
-import type { TooltipEmits, TooltipProps } from './types';
+import type { TooltipEmits, TooltipInstance, TooltipProps } from './types';
 import { createPopper } from '@popperjs/core';
 import type { Instance } from '@popperjs/core';
 import { ref, watch } from 'vue';
+import { onUnmounted } from 'vue';
 import useClickOutside from '@/hooks/useClickOutside';
 defineOptions({
 	name: 'VkTooltip', //定义组件名
@@ -33,10 +34,27 @@ let event = {};
 let outsideEvent = {};
 //点击操作 点击外部dom隐藏
 useClickOutside(popperContainerNode, () => {
-	if (props.trigger === 'click' && isOpen.value) {
+	if (props.trigger === 'click' && isOpen.value && !props.manual) {
 		isOpen.value = false;
 	}
 });
+
+onUnmounted(() => {
+	popperInstance?.destroy();
+});
+
+//手动的情况不绑定事件
+watch(
+	() => props.manual,
+	(isManual) => {
+		if (isManual) {
+			outsideEvent = {};
+			event = {};
+		} else {
+			attachEvents();
+		}
+	}
+);
 
 // 根据trigger绑定事件
 const togglePopper = (_type) => {
@@ -58,9 +76,11 @@ const attachEvents = () => {
 watch(
 	() => props.trigger,
 	() => {
-		outsideEvent = {};
-		event = {};
-		attachEvents();
+		if (!props.manual) {
+			outsideEvent = {};
+			event = {};
+			attachEvents();
+		}
 	},
 	{ immediate: true }
 );
@@ -85,6 +105,11 @@ watch(
 		flush: 'post',
 	}
 );
+
+defineExpose<TooltipInstance>({
+	show: togglePopper('hover-enter'),
+	hide: togglePopper('hover-leave'),
+});
 </script>
 
 <style scoped lang="scss"></style>
