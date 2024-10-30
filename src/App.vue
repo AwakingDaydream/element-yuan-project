@@ -1,6 +1,5 @@
 <template>
-	<img src="@/assets/images/miku.gif" ref="triggerNode" />
-	<div ref="overlayNode">hello miku</div>
+	<vkTooltip content="12345" placement="right"><template #content>123</template><img src="@/assets/images/miku.gif" ref="triggerNode" /></vkTooltip>
 	<h1>Button</h1>
 	<h3>type</h3>
 	<div>
@@ -92,6 +91,7 @@ import vkAlert from '@/components/Alert/Alert.vue';
 import { onMounted, ref } from 'vue';
 import { createPopper } from '@popperjs/core';
 import type { Instance } from '@popperjs/core';
+import vkTooltip from '@/components/Tooltip/Tooltip.vue';
 
 const modelValue = ref(['a']);
 const size = ref<any>('2x');

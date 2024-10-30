@@ -2,7 +2,6 @@ import { describe, test, expect, vi, beforeAll } from 'vitest';
 import { mount } from '@vue/test-utils';
 import Collapse from './Collapse.vue';
 import CollapseItem from './CollapseItem.vue';
-import vkIcon from './Icon/Icon.vue';
 import type { VueWrapper, DOMWrapper } from '@vue/test-utils';
 
 const onChange = vi.fn();
