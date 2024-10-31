@@ -1,14 +1,27 @@
 <template>
-	<vk-button :type="trigger === 'click' ? 'primary' : 'danger'" @click="trigger === 'click' ? (trigger = 'hover') : (trigger = 'click')">
-		trigger:{{ trigger }}
-	</vk-button>
-	<vkTooltip content="12345" placement="right" :trigger="trigger" ref="vkTooltipRef" :manual="manual">
-		<template #content>123</template>
-		<img src="@/assets/images/miku.gif" ref="triggerNode" />
-	</vkTooltip>
-	<vk-button @click="open">toolTipOpen</vk-button>
-	<vk-button @click="hide">toolTipClose</vk-button>
-	<vk-button @click="manual = !manual">manual:{{ manual }}</vk-button>
+	<div style="text-align: center">
+		<vkTooltip
+			content="12345"
+			placement="right"
+			:trigger="trigger"
+			ref="vkTooltipRef"
+			:manual="manual"
+			:popper-options="popperOptions"
+			:open-delay="500"
+			:close-delay="500"
+		>
+			<template #content>123</template>
+			<img src="@/assets/images/miku.gif" ref="triggerNode" />
+		</vkTooltip>
+	</div>
+	<div style="text-align: center">
+		<vk-button :type="trigger === 'click' ? 'primary' : 'danger'" @click="trigger === 'click' ? (trigger = 'hover') : (trigger = 'click')">
+			---trigger:{{ trigger }}
+		</vk-button>
+		<vk-button @click="open">toolTipOpen</vk-button>
+		<vk-button @click="hide">toolTipClose</vk-button>
+		<vk-button @click="manual = !manual">manual:{{ manual }}</vk-button>
+	</div>
 	<h1>Button</h1>
 	<h3>type</h3>
 	<div>
@@ -100,12 +113,17 @@ import vkAlert from '@/components/Alert/Alert.vue';
 import { ref } from 'vue';
 import vkTooltip from '@/components/Tooltip/Tooltip.vue';
 import type { TooltipInstance } from '@/components/Tooltip/types';
+import type { Options } from '@popperjs/core';
 
 const modelValue = ref(['a']);
 const size = ref<any>('2x');
 const trigger = ref<any>('click');
 const manual = ref<any>(false);
 const vkTooltipRef = ref<TooltipInstance>();
+const popperOptions = ref<Partial<Options>>({
+	placement: 'right',
+	strategy: 'fixed',
+});
 
 function open() {
 	vkTooltipRef.value?.show();

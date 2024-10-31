@@ -3,9 +3,11 @@
 		<div class="vk-tooltip__trigger" v-on="event" ref="triggerNode">
 			<slot />
 		</div>
-		<div class="vk-tooltip__popper" ref="popperNode" v-if="isOpen">
-			<slot name="content">{{ content }}</slot>
-		</div>
+		<transition :name="transition">
+			<div class="vk-tooltip__popper" ref="popperNode" v-if="isOpen">
+				<slot name="content">{{ content }}</slot>
+			</div>
+		</transition>
 	</div>
 </template>
 
@@ -13,15 +15,19 @@
 import type { TooltipEmits, TooltipInstance, TooltipProps } from './types';
 import { createPopper } from '@popperjs/core';
 import type { Instance } from '@popperjs/core';
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { onUnmounted } from 'vue';
 import useClickOutside from '@/hooks/useClickOutside';
+import { debounce } from 'lodash-es';
 defineOptions({
 	name: 'VkTooltip', //定义组件名
 });
 const props = withDefaults(defineProps<TooltipProps>(), {
 	placement: 'bottom',
 	trigger: 'hover',
+	transition: 'fade',
+	openDelay: 0,
+	closeDelay: 0,
 });
 const emits = defineEmits<TooltipEmits>();
 const isOpen = ref(false);
@@ -43,6 +49,14 @@ onUnmounted(() => {
 	popperInstance?.destroy();
 });
 
+// poppers Props配置
+const popperOptions = computed(() => {
+	return {
+		placement: props.placement,
+		...props.popperOptions,
+	};
+});
+
 //手动的情况不绑定事件
 watch(
 	() => props.manual,
@@ -60,15 +74,35 @@ watch(
 const togglePopper = (_type) => {
 	const _isEnter = _type === 'hover-enter';
 	const _isClick = _type === 'click';
-	return () => {
-		isOpen.value = _isClick ? !isOpen.value : _isEnter;
-		emits('visible-change', isOpen.value);
+	//防抖
+	return debounce(
+		() => {
+			isOpen.value = _isClick ? !isOpen.value : _isEnter;
+			emits('visible-change', isOpen.value);
+		},
+		isOpen.value ? props.closeDelay : props.openDelay
+	);
+};
+
+const hoverEvent = () => {
+	const _enter = togglePopper('hover-enter');
+	const _leave = togglePopper('hover-leave');
+	return {
+		enter: () => {
+			_leave.cancel(); //清除上一个行为的定时器
+			_enter();
+		},
+		leave: () => {
+			_enter.cancel();
+			_leave();
+		},
 	};
 };
 const attachEvents = () => {
 	if (props.trigger === 'hover') {
-		event['mouseenter'] = togglePopper('hover-enter');
-		outsideEvent['mouseleave'] = togglePopper('hover-leave');
+		const { enter, leave } = hoverEvent();
+		event['mouseenter'] = enter;
+		outsideEvent['mouseleave'] = leave;
 	} else if (props.trigger === 'click') {
 		event['click'] = togglePopper('click');
 	}
@@ -91,9 +125,7 @@ watch(
 		if (isOpen.value) {
 			if (popperNode.value && triggerNode.value) {
 				// 创建popper实例
-				popperInstance = createPopper(triggerNode.value, popperNode.value, {
-					placement: props.placement,
-				});
+				popperInstance = createPopper(triggerNode.value, popperNode.value, popperOptions.value);
 			}
 		} else {
 			//对应的isOpen为false的时候销毁
@@ -106,10 +138,15 @@ watch(
 	}
 );
 
-defineExpose<TooltipInstance>({
-	show: togglePopper('hover-enter'),
-	hide: togglePopper('hover-leave'),
-});
+const exposeParams = () => {
+	const { enter, leave } = hoverEvent();
+	return {
+		show: enter,
+		hide: leave,
+	};
+};
+
+defineExpose<TooltipInstance>(exposeParams());
 </script>
 
 <style scoped lang="scss"></style>
