@@ -45,31 +45,6 @@ useClickOutside(popperContainerNode, () => {
 	}
 });
 
-onUnmounted(() => {
-	popperInstance?.destroy();
-});
-
-// poppers Props配置
-const popperOptions = computed(() => {
-	return {
-		placement: props.placement,
-		...props.popperOptions,
-	};
-});
-
-//手动的情况不绑定事件
-watch(
-	() => props.manual,
-	(isManual) => {
-		if (isManual) {
-			outsideEvent = {};
-			event = {};
-		} else {
-			attachEvents();
-		}
-	}
-);
-
 // 根据trigger绑定事件
 const togglePopper = (_type) => {
 	const _isEnter = _type === 'hover-enter';
@@ -98,6 +73,7 @@ const hoverEvent = () => {
 		},
 	};
 };
+
 const attachEvents = () => {
 	if (props.trigger === 'hover') {
 		const { enter, leave } = hoverEvent();
@@ -107,6 +83,32 @@ const attachEvents = () => {
 		event['click'] = togglePopper('click');
 	}
 };
+
+onUnmounted(() => {
+	popperInstance?.destroy();
+});
+
+// poppers Props配置
+const popperOptions = computed(() => {
+	return {
+		placement: props.placement,
+		...props.popperOptions,
+	};
+});
+
+//手动的情况不绑定事件
+watch(
+	() => props.manual,
+	(isManual) => {
+		if (isManual) {
+			outsideEvent = {};
+			event = {};
+		} else {
+			attachEvents();
+		}
+	}
+);
+
 watch(
 	() => props.trigger,
 	() => {
@@ -129,7 +131,9 @@ watch(
 			}
 		} else {
 			//对应的isOpen为false的时候销毁
-			popperInstance?.destroy();
+			setTimeout(() => {
+				popperInstance?.destroy();
+			}, props.closeDelay + 500);
 		}
 	},
 	{
@@ -141,8 +145,14 @@ watch(
 const exposeParams = () => {
 	const { enter, leave } = hoverEvent();
 	return {
-		show: enter,
-		hide: leave,
+		show: () => {
+			if (!props.manual) return;
+			enter();
+		},
+		hide: () => {
+			if (!props.manual) return;
+			leave();
+		},
 	};
 };
 
