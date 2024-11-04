@@ -37,6 +37,9 @@
       content: "";
       transform: rotate(45deg);
     }
+    /*
+      ^= 以什么名称开头
+    */
     &[data-popper-placement^='top'] > #arrow {
       bottom: -5px;
     }

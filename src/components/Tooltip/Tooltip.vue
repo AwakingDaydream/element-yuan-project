@@ -6,6 +6,7 @@
 		<transition :name="transition">
 			<div class="vk-tooltip__popper" ref="popperNode" v-if="isOpen">
 				<slot name="content">{{ content }}</slot>
+				<div id="arrow" data-popper-arrow></div>
 			</div>
 		</transition>
 	</div>
@@ -92,6 +93,15 @@ onUnmounted(() => {
 const popperOptions = computed(() => {
 	return {
 		placement: props.placement,
+		// 弹窗操作
+		modifiers: [
+			{
+				name: 'offset',
+				options: {
+					offset: [0, 9], //偏移量
+				},
+			},
+		],
 		...props.popperOptions,
 	};
 });
