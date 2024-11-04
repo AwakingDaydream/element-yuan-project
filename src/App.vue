@@ -1,5 +1,21 @@
 <template>
 	<div style="text-align: center">
+		<vkDropdown
+			content="12345"
+			placement="right"
+			:trigger="trigger"
+			ref="vkTooltipRef"
+			:manual="manual"
+			:popper-options="popperOptions"
+			:open-delay="500"
+			:close-delay="500"
+			@visible-change="visiableChange"
+			:menu-options="options"
+		>
+			<img src="@/assets/images/carl.jpeg" ref="triggerNode" />
+		</vkDropdown>
+	</div>
+	<div style="text-align: center">
 		<vkTooltip
 			content="12345"
 			placement="right"
@@ -9,6 +25,7 @@
 			:popper-options="popperOptions"
 			:open-delay="500"
 			:close-delay="500"
+			@visible-change="visiableChange"
 		>
 			<template #content>123</template>
 			<img src="@/assets/images/miku.gif" ref="triggerNode" />
@@ -112,8 +129,10 @@ import vkIcon from '@/components/Icon/Icon.vue';
 import vkAlert from '@/components/Alert/Alert.vue';
 import { ref } from 'vue';
 import vkTooltip from '@/components/Tooltip/Tooltip.vue';
+import vkDropdown from '@/components/Dropdown/Dropdown.vue';
 import type { TooltipInstance } from '@/components/Tooltip/types';
 import type { Options } from '@popperjs/core';
+import type { MenuOption } from '@/components/Dropdown/types';
 
 const modelValue = ref(['a']);
 const size = ref<any>('2x');
@@ -124,6 +143,12 @@ const popperOptions = ref<Partial<Options>>({
 	placement: 'right',
 	strategy: 'fixed',
 });
+const options: MenuOption[] = [
+	// { key: 1, label: h('b', 'this is bold') },
+	{ key: 2, label: 'item2', disabled: true },
+	{ key: 3, label: 'item3', divided: true },
+	{ key: 4, label: 'item4' },
+];
 
 function open() {
 	vkTooltipRef.value?.show();
@@ -131,6 +156,10 @@ function open() {
 
 function hide() {
 	vkTooltipRef.value?.hide();
+}
+
+function visiableChange(flag: boolean) {
+	console.log('---flag---', flag);
 }
 </script>
 

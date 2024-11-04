@@ -24,7 +24,7 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			//地址替换为@
-			'@': fileURLToPath(new URL('./src', import.meta.url)),
+			'@': path.resolve(__dirname, './src'),
 		},
 	},
 	server: {
