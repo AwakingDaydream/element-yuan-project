@@ -127,7 +127,7 @@ import vkCollapse from '@/components/Collapse/Collapse.vue';
 import vkCollapseItem from '@/components/Collapse/CollapseItem.vue';
 import vkIcon from '@/components/Icon/Icon.vue';
 import vkAlert from '@/components/Alert/Alert.vue';
-import { ref } from 'vue';
+import { ref, h } from 'vue';
 import vkTooltip from '@/components/Tooltip/Tooltip.vue';
 import vkDropdown from '@/components/Dropdown/Dropdown.vue';
 import type { TooltipInstance } from '@/components/Tooltip/types';
@@ -144,7 +144,14 @@ const popperOptions = ref<Partial<Options>>({
 	strategy: 'fixed',
 });
 const options: MenuOption[] = [
-	// { key: 1, label: h('b', 'this is bold') },
+	{
+		key: 1,
+		label: h('div', {
+			class: 'name',
+			innerHTML: 'this is bold',
+			style: { color: 'red', fontWeight: 600 },
+		}),
+	},
 	{ key: 2, label: 'item2', disabled: true },
 	{ key: 3, label: 'item3', divided: true },
 	{ key: 4, label: 'item4' },

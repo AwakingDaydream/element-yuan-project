@@ -29,6 +29,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
 	transition: 'fade',
 	openDelay: 0,
 	closeDelay: 0,
+	isDropdown: false,
 });
 const emits = defineEmits<TooltipEmits>();
 const isOpen = ref(false);
@@ -156,11 +157,11 @@ const exposeParams = () => {
 	const { enter, leave } = hoverEvent();
 	return {
 		show: () => {
-			if (!props.manual) return;
+			if (!props.manual && !props.isDropdown) return;
 			enter();
 		},
 		hide: () => {
-			if (!props.manual) return;
+			if (!props.manual && !props.isDropdown) return;
 			leave();
 		},
 	};

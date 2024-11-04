@@ -4,6 +4,7 @@ import type { TooltipProps } from '@/components/Tooltip/types';
 // 继承Tooltip的属性，依此触发
 export interface DropdownProps extends TooltipProps {
 	menuOptions: MenuOption[]; // 下拉数据
+	hideAfterClick?: boolean;
 }
 
 export interface MenuOption {

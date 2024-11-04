@@ -9,6 +9,7 @@
 			:close-delay="closeDelay"
 			@visible-change="visibleChange"
 			ref="tooltipRef"
+			is-dropdown
 		>
 			<!--slot抛出后点击展示tooltip-->
 			<slot />
@@ -22,8 +23,7 @@
 							:class="{ 'is-disabled': item.disabled, 'is-divided': item.divided }"
 							:id="`dropdown-item-${item.key}`"
 						>
-							{{ item.label }}
-							<!--              <RenderVnode :vNode="item.label"/>-->
+							<RenderVnode :v-node="item.label" />
 						</li>
 					</template>
 				</ul>
@@ -37,10 +37,13 @@ import type { DropdownEmits, DropdownInstance, DropdownProps, MenuOption } from 
 import type { TooltipInstance } from '@/components/Tooltip/types';
 import { ref } from 'vue';
 import vkTooltip from '@/components/Tooltip/Tooltip.vue';
+import RenderVnode from '@/components/Common/RenderVnode';
 defineOptions({
 	name: 'VkDropdown', //定义组件名
 });
-const props = defineProps<DropdownProps>();
+const props = withDefaults(defineProps<DropdownProps>(), {
+	hideAfterClick: true,
+});
 const emits = defineEmits<DropdownEmits>();
 const tooltipRef = ref<TooltipInstance | null>();
 
@@ -50,6 +53,9 @@ const visibleChange = (e: boolean) => {
 };
 const itemClick = (e: MenuOption) => {
 	if (e.disabled) return;
+	if (props.hideAfterClick) {
+		tooltipRef.value?.hide();
+	}
 	emits('select', e);
 };
 
