@@ -157,11 +157,9 @@ const exposeParams = () => {
 	const { enter, leave } = hoverEvent();
 	return {
 		show: () => {
-			if (!props.manual && !props.isDropdown) return;
 			enter();
 		},
 		hide: () => {
-			if (!props.manual && !props.isDropdown) return;
 			leave();
 		},
 	};

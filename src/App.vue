@@ -4,7 +4,7 @@
 			content="12345"
 			placement="right"
 			:trigger="trigger"
-			ref="vkTooltipRef"
+			ref="vkTooltipRef1"
 			:manual="manual"
 			:popper-options="popperOptions"
 			:open-delay="500"
@@ -129,7 +129,7 @@ import vkIcon from '@/components/Icon/Icon.vue';
 import vkAlert from '@/components/Alert/Alert.vue';
 import { ref, h } from 'vue';
 import vkTooltip from '@/components/Tooltip/Tooltip.vue';
-import vkDropdown from '@/components/Dropdown/Dropdown.vue';
+import vkDropdown from '@/components/Dropdown/Dropdown';
 import type { TooltipInstance } from '@/components/Tooltip/types';
 import type { Options } from '@popperjs/core';
 import type { MenuOption } from '@/components/Dropdown/types';
@@ -139,6 +139,7 @@ const size = ref<any>('2x');
 const trigger = ref<any>('click');
 const manual = ref<any>(false);
 const vkTooltipRef = ref<TooltipInstance>();
+const vkTooltipRef1 = ref<TooltipInstance>();
 const popperOptions = ref<Partial<Options>>({
 	placement: 'right',
 	strategy: 'fixed',
@@ -158,11 +159,11 @@ const options: MenuOption[] = [
 ];
 
 function open() {
-	vkTooltipRef.value?.show();
+	vkTooltipRef1.value?.show();
 }
 
 function hide() {
-	vkTooltipRef.value?.hide();
+	vkTooltipRef1.value?.hide();
 }
 
 function visiableChange(flag: boolean) {

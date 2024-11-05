@@ -9,7 +9,6 @@ export interface TooltipProps {
 	transition?: string;
 	openDelay?: number;
 	closeDelay?: number;
-	isDropdown?: boolean;
 }
 
 export interface TooltipEmits {
