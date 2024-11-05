@@ -1,5 +1,6 @@
 import { defineComponent } from 'vue';
 
+// defineComponent 返回一个vnode 或者 渲染标签
 const RenderVnode = defineComponent({
 	props: {
 		vNode: {

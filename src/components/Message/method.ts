@@ -10,6 +10,6 @@ export function createMessage(props: MessageProps) {
 	 * */
 	const container = document.createElement('div');
 	const VNode = h(MessageConstructor, props); //创建虚拟节点
-	render(VNode, container); //将虚拟节点挂载到container上
+	render(VNode, container); //将虚拟节点使用render函数生成真实节点后挂载到container上
 	document.body.appendChild(container.firstElementChild!); // !非空断言 挂载该container的第一个子节点，即message组件
 }

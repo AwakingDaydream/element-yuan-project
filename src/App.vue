@@ -174,6 +174,14 @@ function visiableChange(flag: boolean) {
 }
 
 onMounted(() => {
+	console.log(
+		'---vnode---',
+		h('div', {
+			class: 'name',
+			innerHTML: 'this is bold',
+			style: { color: 'red', fontWeight: 600 },
+		})
+	);
 	createMessage({ message: options[0].label, showClose: true });
 });
 </script>
