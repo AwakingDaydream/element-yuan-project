@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import type { MessageProps } from '@/components/Message/types';
 import RenderVnode from '@/components/Common/RenderVnode';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import vkIcon from '@/components/Icon/Icon.vue';
 
 defineOptions({
@@ -26,6 +26,13 @@ const props = withDefaults(defineProps<MessageProps>(), {
 	showClose: false,
 });
 const visible = ref(false);
+
+watch(visible, (newVal) => {
+	if (newVal === false) {
+		props.onDestory();
+	}
+});
+
 const startTimer = () => {
 	if (props.duration === 0) return;
 	setTimeout(() => {
