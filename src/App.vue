@@ -1,5 +1,4 @@
 <template>
-	<!--	<vkMessage :message="options[0].label" show-close />-->
 	<div style="text-align: center">
 		<vkDropdown
 			content="12345"
@@ -134,7 +133,6 @@ import vkDropdown from '@/components/Dropdown/Dropdown';
 import type { TooltipInstance } from '@/components/Tooltip/types';
 import type { Options } from '@popperjs/core';
 import type { MenuOption } from '@/components/Dropdown/types';
-import vkMessage from '@/components/Message/Message.vue';
 import { createMessage } from '@/components/Message';
 
 const modelValue = ref(['a']);
@@ -174,15 +172,9 @@ function visiableChange(flag: boolean) {
 }
 
 onMounted(() => {
-	console.log(
-		'---vnode---',
-		h('div', {
-			class: 'name',
-			innerHTML: 'this is bold',
-			style: { color: 'red', fontWeight: 600 },
-		})
-	);
 	createMessage({ message: options[0].label, showClose: true });
+	createMessage({ message: options[1].label, showClose: true });
+	createMessage({ message: options[2].label, showClose: true });
 });
 </script>
 

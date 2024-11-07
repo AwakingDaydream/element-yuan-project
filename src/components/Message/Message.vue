@@ -16,6 +16,7 @@ import type { MessageProps } from '@/components/Message/types';
 import RenderVnode from '@/components/Common/RenderVnode';
 import { onMounted, ref, watch } from 'vue';
 import vkIcon from '@/components/Icon/Icon.vue';
+import { getLastInstance } from '@/components/Message/index';
 
 defineOptions({
 	name: 'VkMessage', //定义组件名
@@ -26,6 +27,7 @@ const props = withDefaults(defineProps<MessageProps>(), {
 	showClose: false,
 });
 const visible = ref(false);
+const preInstance = getLastInstance(); //获取最近的实例
 
 watch(visible, (newVal) => {
 	if (newVal === false) {
@@ -43,6 +45,7 @@ const startTimer = () => {
 onMounted(() => {
 	visible.value = true;
 	startTimer();
+	console.log('preInstance---', preInstance);
 });
 </script>
 

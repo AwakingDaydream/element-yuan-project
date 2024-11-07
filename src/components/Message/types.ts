@@ -8,5 +8,12 @@ export interface MessageProps {
 	onDestory: () => void;
 }
 
+// message对应存储属性
+export interface MessageContext {
+	id: string;
+	vnode: VNode;
+	props: MessageProps;
+}
+
 // CreateMessageProps 忽略 onDestory
 export type CreateMessageProps = Omit<MessageProps, 'onDestory'>;
