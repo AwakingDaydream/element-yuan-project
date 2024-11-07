@@ -8,6 +8,7 @@ export interface MessageProps {
 	onDestory: () => void;
 	offset?: number; // 距离顶部的初始值
 	id: string;
+	zIndex: number;
 }
 
 // message对应存储属性
@@ -20,4 +21,4 @@ export interface MessageContext {
 }
 
 // CreateMessageProps 忽略 onDestory/id
-export type CreateMessageProps = Omit<MessageProps, 'onDestory' | 'id'>;
+export type CreateMessageProps = Omit<MessageProps, 'onDestory' | 'id' | 'zIndex'>;

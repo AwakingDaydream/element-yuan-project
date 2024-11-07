@@ -51,6 +51,7 @@ const bottomOffset = computed(() => topOffset.value + height.value);
 const cssStyle = computed(() => {
 	return {
 		top: `${topOffset.value}px`,
+		zIndex: props.zIndex,
 	};
 });
 

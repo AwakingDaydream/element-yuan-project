@@ -1,7 +1,9 @@
 import type { CreateMessageProps, MessageContext } from '@/components/Message/types';
 import MessageConstructor from '@/components/Message/Message.vue';
 import { h, render, shallowReactive } from 'vue';
+import { useZIndex } from '@/hooks/useZIndex';
 
+const { nextZIndex } = useZIndex();
 // 实例对象数组
 let seed = 1; // 实例个数
 //shallowReactive 对象的根属性才有响应式
@@ -34,6 +36,7 @@ export function createMessage(props: CreateMessageProps) {
 	const newProps = {
 		...props,
 		id,
+		zIndex: nextZIndex(),
 		onDestory: destory,
 	};
 	const VNode = h(MessageConstructor, newProps); //创建虚拟节点
