@@ -135,7 +135,7 @@ import type { TooltipInstance } from '@/components/Tooltip/types';
 import type { Options } from '@popperjs/core';
 import type { MenuOption } from '@/components/Dropdown/types';
 import vkMessage from '@/components/Message/Message.vue';
-import { createMessage } from '@/components/Message/method';
+import { createMessage } from '@/components/Message';
 
 const modelValue = ref(['a']);
 const size = ref<any>('2x');
