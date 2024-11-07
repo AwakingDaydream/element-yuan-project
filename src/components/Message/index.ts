@@ -8,7 +8,7 @@ let seed = 1; // 实例个数
 const instances: MessageContext[] = shallowReactive([]); //设置为响应式变量，在message组件中计算属性绑定，更新时重新执行
 console.log('instances----', instances);
 
-export async function createMessage(props: CreateMessageProps) {
+export function createMessage(props: CreateMessageProps) {
 	/*
 	 *  函数操作流程：通过h创建虚拟节点，再通过render函数渲染到对应的dom节点上
 	 *  h函数创建vnode虚拟节点
@@ -23,6 +23,13 @@ export async function createMessage(props: CreateMessageProps) {
 		if (idx === -1) return;
 		instances.splice(idx, 1);
 		render(null, container);
+	};
+	//手动调用删除 即修改visible
+	const manualDestory = () => {
+		const instance = instances.find((item) => item.id === id);
+		if (instance) {
+			instance.vm.exposed!.visible.value = false;
+		}
 	};
 	const newProps = {
 		...props,
@@ -43,6 +50,7 @@ export async function createMessage(props: CreateMessageProps) {
 		vm, //vm生成是异步的
 		vnode: VNode, //组件实例的component.exposed可以拿到导出的实例属性
 		props: newProps,
+		destory: manualDestory,
 	};
 	instances.push(_instance);
 	//将当前实例返回
@@ -57,8 +65,6 @@ export const getLastInstance = () => {
 // 获取距离上一个实例的值 instance.offset+instance.height
 export const getLastBottomOffset = (id: string) => {
 	const idx = instances.findIndex((item) => item.id === id);
-	console.log('id---', id, idx, instances, instances.length);
-
 	if (idx <= 0) return 0;
 	const prev = instances[idx - 1]; //上一个实例
 	return prev.vm.exposed!.bottomOffset.value;

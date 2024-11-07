@@ -1,4 +1,5 @@
 <template>
+	<button @click="message1.destory()">销毁</button>
 	<div style="text-align: center">
 		<vkDropdown
 			content="12345"
@@ -134,6 +135,7 @@ import type { TooltipInstance } from '@/components/Tooltip/types';
 import type { Options } from '@popperjs/core';
 import type { MenuOption } from '@/components/Dropdown/types';
 import { createMessage } from '@/components/Message';
+import type { MessageContext } from '@/components/Message/types';
 
 const modelValue = ref(['a']);
 const size = ref<any>('2x');
@@ -141,6 +143,7 @@ const trigger = ref<any>('click');
 const manual = ref<any>(false);
 const vkTooltipRef = ref<TooltipInstance>();
 const vkTooltipRef1 = ref<TooltipInstance>();
+const message1 = ref<MessageContext | null>();
 const popperOptions = ref<Partial<Options>>({
 	placement: 'right',
 	strategy: 'fixed',
@@ -172,7 +175,8 @@ function visiableChange(flag: boolean) {
 }
 
 onMounted(() => {
-	createMessage({ message: options[0].label, showClose: true, duration: 0 });
+	message1.value = createMessage({ message: options[0].label, showClose: true, duration: 0 });
+	console.log('message1.value---', message1.value);
 	createMessage({ message: options[1].label, showClose: true, duration: 0 });
 	createMessage({ message: options[2].label, showClose: true, duration: 0 });
 });

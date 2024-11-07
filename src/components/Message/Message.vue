@@ -71,12 +71,12 @@ onMounted(async () => {
 	visible.value = true;
 	await nextTick(); // 强制更新后在往下执行，不然获取不到高度
 	height.value = messageRef.value!.getBoundingClientRect().height;
-	console.log('height.value---', height.value);
 	startTimer();
 });
 
 defineExpose({
-	bottomOffset, //将bottomOffset暴露出去
+	visible,
+	bottomOffset,
 });
 </script>
 

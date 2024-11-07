@@ -16,6 +16,7 @@ export interface MessageContext {
 	vnode: VNode;
 	vm: ComponentInternalInstance; //组件实例
 	props: MessageProps;
+	destory: () => void;
 }
 
 // CreateMessageProps 忽略 onDestory/id
