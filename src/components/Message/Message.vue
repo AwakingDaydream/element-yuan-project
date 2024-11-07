@@ -1,5 +1,15 @@
 <template>
-	<div class="vk-message" v-show="visible">
+	<div
+		class="vk-message"
+		v-show="visible"
+		:class="{
+			[`vk-message--${type}`]: type,
+			'is-close': showClose,
+		}"
+		role="alert"
+		ref="messageRef"
+		:style="cssStyle"
+	>
 		<div class="vk-message__content">
 			<slot> <RenderVnode :v-node="message" v-if="message" /></slot>
 		</div>
@@ -14,9 +24,9 @@
 <script setup lang="ts">
 import type { MessageProps } from '@/components/Message/types';
 import RenderVnode from '@/components/Common/RenderVnode';
-import { onMounted, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch, nextTick } from 'vue';
 import vkIcon from '@/components/Icon/Icon.vue';
-import { getLastInstance } from '@/components/Message/index';
+import { getLastBottomOffset } from '@/components/Message/index';
 
 defineOptions({
 	name: 'VkMessage', //定义组件名
@@ -25,9 +35,24 @@ const props = withDefaults(defineProps<MessageProps>(), {
 	duration: 3000,
 	type: 'info',
 	showClose: false,
+	offset: 20,
 });
 const visible = ref(false);
-const preInstance = getLastInstance(); //获取最近的实例
+const messageRef = ref<HTMLDivElement>();
+// const preInstance = getLastInstance(); //获取最近的实例
+
+const height = ref(0); // 实例高度
+// lastOffset：上一个实例的 offset+height（bottomOffset）
+const lastOffset = computed(() => getLastBottomOffset(props.id));
+// 该实例的top
+const topOffset = computed(() => lastOffset.value + props.offset);
+// 预留该实例的offset
+const bottomOffset = computed(() => topOffset.value + height.value);
+const cssStyle = computed(() => {
+	return {
+		top: `${topOffset.value}px`,
+	};
+});
 
 watch(visible, (newVal) => {
 	if (newVal === false) {
@@ -42,10 +67,16 @@ const startTimer = () => {
 	}, props.duration);
 };
 
-onMounted(() => {
+onMounted(async () => {
 	visible.value = true;
+	await nextTick(); // 强制更新后在往下执行，不然获取不到高度
+	height.value = messageRef.value!.getBoundingClientRect().height;
+	console.log('height.value---', height.value);
 	startTimer();
-	console.log('preInstance---', preInstance);
+});
+
+defineExpose({
+	bottomOffset, //将bottomOffset暴露出去
 });
 </script>
 

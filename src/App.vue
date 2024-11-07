@@ -172,9 +172,9 @@ function visiableChange(flag: boolean) {
 }
 
 onMounted(() => {
-	createMessage({ message: options[0].label, showClose: true });
-	createMessage({ message: options[1].label, showClose: true });
-	createMessage({ message: options[2].label, showClose: true });
+	createMessage({ message: options[0].label, showClose: true, duration: 0 });
+	createMessage({ message: options[1].label, showClose: true, duration: 0 });
+	createMessage({ message: options[2].label, showClose: true, duration: 0 });
 });
 </script>
 
