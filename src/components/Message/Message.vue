@@ -9,6 +9,8 @@
 		role="alert"
 		ref="messageRef"
 		:style="cssStyle"
+		@mouseenter="endTimer"
+		@mouseleave="startTimer"
 	>
 		<div class="vk-message__content">
 			<slot> <RenderVnode :v-node="message" v-if="message" /></slot>
@@ -27,6 +29,7 @@ import RenderVnode from '@/components/Common/RenderVnode';
 import { computed, onMounted, ref, watch, nextTick } from 'vue';
 import vkIcon from '@/components/Icon/Icon.vue';
 import { getLastBottomOffset } from '@/components/Message/index';
+import useEventListener from '@/hooks/useEventListener';
 
 defineOptions({
 	name: 'VkMessage', //定义组件名
@@ -39,6 +42,7 @@ const props = withDefaults(defineProps<MessageProps>(), {
 });
 const visible = ref(false);
 const messageRef = ref<HTMLDivElement>();
+let timer: any = null;
 // const preInstance = getLastInstance(); //获取最近的实例
 
 const height = ref(0); // 实例高度
@@ -55,6 +59,14 @@ const cssStyle = computed(() => {
 	};
 });
 
+const keydown = (e: Event) => {
+	const event = e as KeyboardEvent; //断言成键盘事件对象
+	if (event.code === 'Escape') {
+		visible.value = false;
+	}
+};
+useEventListener(document, 'keydown', keydown);
+
 watch(visible, (newVal) => {
 	if (newVal === false) {
 		props.onDestory();
@@ -63,9 +75,13 @@ watch(visible, (newVal) => {
 
 const startTimer = () => {
 	if (props.duration === 0) return;
-	setTimeout(() => {
+	timer = setTimeout(() => {
 		visible.value = false;
 	}, props.duration);
+};
+
+const endTimer = () => {
+	clearTimeout(timer);
 };
 
 onMounted(async () => {

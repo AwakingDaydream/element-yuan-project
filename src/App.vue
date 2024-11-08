@@ -175,7 +175,7 @@ function visiableChange(flag: boolean) {
 }
 
 onMounted(() => {
-	message1.value = createMessage({ message: options[0].label, showClose: true, duration: 0 });
+	message1.value = createMessage({ message: options[0].label, showClose: true, duration: 1000 });
 	console.log('message1.value---', message1.value);
 	createMessage({ message: options[1].label, showClose: true, duration: 0 });
 	createMessage({ message: options[2].label, showClose: true, duration: 0 });
