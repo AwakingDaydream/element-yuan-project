@@ -1,7 +1,7 @@
 import type { CreateMessageProps, MessageContext } from '@/components/Message/types';
 import MessageConstructor from '@/components/Message/Message.vue';
 import { h, render, shallowReactive } from 'vue';
-import { useZIndex } from '@/hooks/useZIndex';
+import useZIndex from '@/hooks/useZIndex';
 
 const { nextZIndex } = useZIndex();
 // 实例对象数组
