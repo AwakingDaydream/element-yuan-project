@@ -4,6 +4,7 @@ export interface MessageProps {
 	message?: string | VNode;
 	duration?: number;
 	showClose?: boolean;
+	transitionName?: string;
 	type?: 'success' | 'warning' | 'danger' | 'info' | 'primary';
 	onDestory: () => void;
 	offset?: number; // 距离顶部的初始值

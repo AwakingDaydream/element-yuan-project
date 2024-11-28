@@ -154,7 +154,6 @@ const options: MenuOption[] = [
 		label: h('div', {
 			class: 'name',
 			innerHTML: 'this is bold',
-			style: { color: 'red', fontWeight: 600 },
 		}),
 	},
 	{ key: 2, label: 'item2', disabled: true },
@@ -175,7 +174,7 @@ function visiableChange(flag: boolean) {
 }
 
 onMounted(() => {
-	message1.value = createMessage({ message: options[0].label, showClose: true, duration: 1000 });
+	message1.value = createMessage({ message: options[0].label, showClose: true, duration: 1000, type: 'danger' });
 	console.log('message1.value---', message1.value);
 	createMessage({ message: options[1].label, showClose: true, duration: 0 });
 	createMessage({ message: options[2].label, showClose: true, duration: 0 });

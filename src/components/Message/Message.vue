@@ -1,26 +1,28 @@
 <template>
-	<div
-		class="vk-message"
-		v-show="visible"
-		:class="{
-			[`vk-message--${type}`]: type,
-			'is-close': showClose,
-		}"
-		role="alert"
-		ref="messageRef"
-		:style="cssStyle"
-		@mouseenter="endTimer"
-		@mouseleave="startTimer"
-	>
-		<div class="vk-message__content">
-			<slot> <RenderVnode :v-node="message" v-if="message" /></slot>
+	<Transition :name="transitionName" @after-leave="destroyComponent" @enter="updateHeight">
+		<div
+			class="vk-message"
+			v-show="visible"
+			:class="{
+				[`vk-message--${type}`]: type,
+				'is-close': showClose,
+			}"
+			role="alert"
+			ref="messageRef"
+			:style="cssStyle"
+			@mouseenter="endTimer"
+			@mouseleave="startTimer"
+		>
+			<div class="vk-message__content">
+				<slot> <RenderVnode :v-node="message" v-if="message" /></slot>
+			</div>
+			<div class="vk-message__close" v-if="showClose">
+				<slot name="close">
+					<vk-icon :icon="['fas', 'xmark']" @click.stop="visible = false"></vk-icon>
+				</slot>
+			</div>
 		</div>
-		<div class="vk-message__close" v-if="showClose">
-			<slot name="close">
-				<vk-icon :icon="['fas', 'xmark']" @click.stop="visible = false"></vk-icon>
-			</slot>
-		</div>
-	</div>
+	</Transition>
 </template>
 
 <script setup lang="ts">
@@ -39,6 +41,7 @@ const props = withDefaults(defineProps<MessageProps>(), {
 	type: 'info',
 	showClose: false,
 	offset: 20,
+	transitionName: 'fade-up',
 });
 const visible = ref(false);
 const messageRef = ref<HTMLDivElement>();
@@ -67,11 +70,11 @@ const keydown = (e: Event) => {
 };
 useEventListener(document, 'keydown', keydown);
 
-watch(visible, (newVal) => {
-	if (newVal === false) {
-		props.onDestory();
-	}
-});
+// watch(visible, (newVal) => {
+// 	if (newVal === false) {
+// 		props.onDestory();
+// 	}
+// });
 
 const startTimer = () => {
 	if (props.duration === 0) return;
@@ -86,25 +89,20 @@ const endTimer = () => {
 
 onMounted(async () => {
 	visible.value = true;
-	await nextTick(); // 强制更新后在往下执行，不然获取不到高度
-	height.value = messageRef.value!.getBoundingClientRect().height;
+	// await nextTick(); // 强制更新后在往下执行，不然获取不到高度
+	// height.value = messageRef.value!.getBoundingClientRect().height;
 	startTimer();
 });
+
+function destroyComponent() {
+	props.onDestory();
+}
+function updateHeight() {
+	height.value = messageRef.value!.getBoundingClientRect().height;
+}
 
 defineExpose({
 	visible,
 	bottomOffset,
 });
 </script>
-
-<style scoped lang="scss">
-.vk-message {
-	width: max-content;
-	position: fixed;
-	top: 20px;
-	left: 50%;
-	transform: translateX(-50%);
-	border: 1px solid;
-	background-color: #ffffff;
-}
-</style>
