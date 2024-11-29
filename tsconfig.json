@@ -29,12 +29,17 @@
   "files": [
     "window.d.ts"
   ],
+  /*
+  指定需要编译处理的文件列表，支持 glob 模式匹配，文件的解析路径相对于当前项目的tsconfig.json文件位置
+  */
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
     "types/**/*.d.ts",
-    "types/**/*.ts"
+    "types/**/*.ts",
+    "docs/**/*",
+    "docs/**/*.vue"
   ],
   "exclude": ["node_modules"],
   "types": [
