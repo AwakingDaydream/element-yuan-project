@@ -15,6 +15,7 @@
 /*固定字面量*/
 export type ButtonType = 'primary' | 'success' | 'warning' | 'danger' | 'info';
 export type ButtonSize = 'large' | 'small';
+export type IconType = 'string' | string[];
 export type NativeType = 'button' | 'submit' | 'reset';
 
 export interface ButtonProps {
@@ -22,12 +23,13 @@ export interface ButtonProps {
 	size?: ButtonSize;
 	plain?: boolean;
 	round?: boolean;
+	link?: boolean;
 	circle?: boolean;
 	disabled?: boolean;
 	nativeType?: NativeType;
 	autofocus?: boolean;
 	loading?: boolean;
-	icon?: string;
+	icon?: IconType;
 }
 
 export interface ButtonInstance {

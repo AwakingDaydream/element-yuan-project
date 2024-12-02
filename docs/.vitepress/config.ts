@@ -4,7 +4,7 @@ import { componentPreview, containerPreview } from '@vitepress-demo-preview/plug
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-	title: 'My Awesome Project',
+	title: 'ChinaYuan Project',
 	description: 'A VitePress Site',
 	vite: {
 		resolve: {
@@ -25,7 +25,7 @@ export default defineConfig({
 	themeConfig: {
 		nav: [
 			{ text: '指南', link: '/' },
-			{ text: '组件', link: '/component' },
+			{ text: '组件', link: '/component/button' },
 		],
 
 		sidebar: [

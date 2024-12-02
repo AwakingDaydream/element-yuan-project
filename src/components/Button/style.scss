@@ -77,6 +77,7 @@
 
   // 圆形按钮
   &.is-circle {
+    width: 32px;
     border-radius: 50%;
     padding: 8px;
   }
@@ -101,7 +102,10 @@
     [attribute*=value]，a[src$="abc"]，选择其 src 属性中值以 "abc" 结尾的每个 <a> 元素。
     用[class*=" icon-"], [class^=icon-]经过测试发现，value可以加双引号，可以不加，效果一致。
   */
-  [class*=vk-icon] +span{
+  [class*=vk-icon] .svg-inline--fa{
+    height: calc(var(--vk-font-size-small) - 1px);
+  }
+  [class*=vk-icon] + span:not(:empty){ // 判断span里面有值才有样式改动
     margin-left: 6px;
   }
 }
@@ -135,6 +139,23 @@
     --vk-button-disabled-bg-color: var(--vk-color-#{$val}-light-9);
     --vk-button-disabled-border-color: var(--vk-color-#{$val}-light-8);
   }
+  // link样式
+  .vk-button.is-link{
+    --vk-button-bg-color:var(--vk-fill-color-blank);
+    --vk-button-border-color:var(--vk-fill-color-blank);
+    --vk-button-hover-bg-color: var(--vk-fill-color-blank);
+    --vk-button-hover-border-color: var(--vk-fill-color-blank);
+    --vk-button-active-border-color:var(--vk-fill-color-blank);
+    --vk-button-active-bg-color: var(--vk-fill-color-blank);
+    --vk-button-disabled-bg-color:var(--vk-fill-color-blank);
+    --vk-button-disabled-border-color:var(--vk-fill-color-blank);
+  }
+  .vk-button--#{$val}.is-link {
+    --vk-button-text-color: var(--vk-color-#{$val});
+    --vk-button-hover-text-color: var(--vk-color-#{$val}-light-5);
+    --vk-button-active-text-color: var(--vk-color-#{$val});
+    --vk-button-disabled-text-color: var(--vk-color-#{$val}-light-5);
+  }
 }
 
 // 按钮大小的控制
@@ -145,7 +166,10 @@
   font-size: var(--vk-font-size-base);
   border-radius: var(--vk-border-radius-base);
   [class*=vk-icon] .svg-inline--fa{
-    height: var(--vk-font-size-base);
+    height: calc(var(--vk-font-size-small) + 1px);
+  }
+  &.is-circle{
+    width: var(--vk-button-size);;
   }
 }
 .vk-button--small {
@@ -153,8 +177,11 @@
   height: var(--vk-button-size);
   padding: 5px 11px;
   font-size: 12px;
-  border-radius: calc(var(--vk-border-radius-base) - 1px);
+  border-radius: calc(var(--vk-border-radius-base) - 2px);
   [class*=vk-icon] .svg-inline--fa{
-    height: 12px;
+    height: calc(var(--vk-font-size-small) - 3px);
+  }
+  &.is-circle{
+    width: var(--vk-button-size);;
   }
 }

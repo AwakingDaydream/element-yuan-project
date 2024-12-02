@@ -9,13 +9,14 @@
 			'is-circle': circle,
 			'is-disabled': disabled,
 			'is-loading': loading,
+			'is-link': link,
 		}"
 		:disabled="disabled || loading"
 		:autofocus="autofocus"
 		:type="nativeType"
 	>
-		<vk-icon icon="spinner" spin v-if="loading" />
-		<vk-icon :icon="icon" v-if="icon" />
+		<slot name="loadingIcon" v-if="loading"><vk-icon icon="spinner" spin /></slot>
+		<vk-icon :icon="icon" v-if="icon && !loading" />
 		<span>
 			<slot />
 		</span>
