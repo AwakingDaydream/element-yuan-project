@@ -4,9 +4,10 @@ import { componentPreview, containerPreview } from '@vitepress-demo-preview/plug
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+	head: [['link', { rel: 'icon', href: 'favicon.ico' }]],
 	base: '/element-yuan-project/',
-	title: 'ChinaYuan Project',
-	description: 'A VitePress Site',
+	title: 'IncBo',
+	description: 'A novice',
 	vite: {
 		resolve: {
 			//重新配置@的指向
@@ -24,13 +25,19 @@ export default defineConfig({
 	},
 	// srcDir: './component',
 	themeConfig: {
-		logo: '../miku.png',
+		logo: 'miku.png',
 		nav: [
-			{ text: 'Vue', link: '/vue/index' },
-			{ text: 'JavaScript', link: '/javascript/index' },
-			{ text: 'Canvas学习', link: '/canvas/index' },
-			{ text: '组件临摹', link: '/component/button' },
+			// { text: 'Vue', link: '/vue/index' },
+			{ text: '随笔', link: '/javascript/index' },
+			{ text: '学习笔记', link: '/canvas/index' },
+			{ text: '组件开发', link: '/component/button' },
+			{ text: '关于我', link: '/component/button' },
 		],
+
+		footer: {
+			message: '学无止尽，唯有努力',
+			copyright: 'Fighting',
+		},
 
 		sidebar: {
 			'/vue/': [

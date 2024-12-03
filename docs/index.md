@@ -3,9 +3,9 @@
 layout: home
 
 hero:
-  name: "MIAO's Notes"
-  text: "小缪的随笔"
-  tagline: Fighting
+  name: "IncBo's Blog"
+  text: ""
+  tagline: A rock music fan
   actions:
     - theme: brand
       text: 指南入口
