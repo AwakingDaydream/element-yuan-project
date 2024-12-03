@@ -6,20 +6,26 @@ hero:
   name: "IncBo's Blog"
   text: ""
   tagline: A rock music fan
+#  image:
+#    src: /home.jpg
+#    alt: VitePress
   actions:
     - theme: brand
-      text: 指南入口
+      text: 网站初衷
       link: /markdown-examples
     - theme: alt
-      text: 组件入口
+      text: 随笔
       link: /api-examples
 
 features:
-  - title: Vue 和 Javascript
-    details: 相关的知识整理
-  - title: 组件临摹
-    details: 个人组件库的开发
-  - title: Canvas
-    details: Echarts 和 Canvas 的组件开发
+  - icon: 🧗
+    title: 
+    details: 
+  - icon: 📖
+    title: 
+    details: 
+  - icon: 🤔️
+    title: 
+    details: 
 ---
 

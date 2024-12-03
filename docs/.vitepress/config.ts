@@ -28,7 +28,6 @@ export default defineConfig({
 		logo: '/miku.png',
 		nav: [
 			// { text: 'Vue', link: '/vue/index' },
-			{ text: '随笔', link: '/javascript/index' },
 			{ text: '学习笔记', link: '/canvas/index' },
 			{ text: '组件开发', link: '/component/button' },
 			{ text: '关于我', link: '/component/button' },
