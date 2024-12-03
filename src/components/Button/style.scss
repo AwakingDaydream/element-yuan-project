@@ -141,14 +141,14 @@
   }
   // link样式
   .vk-button.is-link{
-    --vk-button-bg-color:var(--vk-fill-color-blank);
-    --vk-button-border-color:var(--vk-fill-color-blank);
-    --vk-button-hover-bg-color: var(--vk-fill-color-blank);
-    --vk-button-hover-border-color: var(--vk-fill-color-blank);
-    --vk-button-active-border-color:var(--vk-fill-color-blank);
-    --vk-button-active-bg-color: var(--vk-fill-color-blank);
-    --vk-button-disabled-bg-color:var(--vk-fill-color-blank);
-    --vk-button-disabled-border-color:var(--vk-fill-color-blank);
+    --vk-button-bg-color:transparent;
+    --vk-button-border-color:transparent;
+    --vk-button-hover-bg-color: transparent;
+    --vk-button-hover-border-color: transparent;
+    --vk-button-active-border-color:transparent;
+    --vk-button-active-bg-color: transparent;
+    --vk-button-disabled-bg-color:transparent;
+    --vk-button-disabled-border-color:transparent;
   }
   .vk-button--#{$val}.is-link {
     --vk-button-text-color: var(--vk-color-#{$val});
