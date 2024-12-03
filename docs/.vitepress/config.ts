@@ -4,7 +4,7 @@ import { componentPreview, containerPreview } from '@vitepress-demo-preview/plug
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-	head: [['link', { rel: 'icon', href: '../public/favicon.ico' }]],
+	head: [['link', { rel: 'icon', href: '/element-yuan-project/favicon.ico' }]],
 	base: '/element-yuan-project/',
 	title: 'IncBo',
 	description: 'A novice',
@@ -25,7 +25,7 @@ export default defineConfig({
 	},
 	// srcDir: './component',
 	themeConfig: {
-		logo: '../public/miku.png',
+		logo: '/miku.png',
 		nav: [
 			// { text: 'Vue', link: '/vue/index' },
 			{ text: '随笔', link: '/javascript/index' },
