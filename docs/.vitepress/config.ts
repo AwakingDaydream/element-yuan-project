@@ -7,6 +7,7 @@ export default defineConfig({
 	head: [['link', { rel: 'icon', href: '/element-yuan-project/favicon.ico' }]],
 	base: '/element-yuan-project/',
 	title: 'IncBo',
+	lastUpdated: true,
 	description: 'A novice',
 	vite: {
 		resolve: {
