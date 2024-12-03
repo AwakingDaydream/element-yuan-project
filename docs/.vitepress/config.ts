@@ -28,7 +28,7 @@ export default defineConfig({
 		logo: '/miku.png',
 		nav: [
 			// { text: 'Vue', link: '/vue/index' },
-			{ text: '学习笔记', link: '/study/index' },
+			{ text: '学习笔记', link: '/study/responsive2' },
 			{ text: '组件开发', link: '/component/button' },
 			{ text: '关于我', link: '/aboutme' },
 		],
@@ -39,22 +39,18 @@ export default defineConfig({
 		},
 
 		sidebar: {
-			'/vue/': [
-				{
-					text: 'vue',
-					items: [{ text: 'vue 按钮', link: '/vue/index.md' }],
-				},
-			],
-			'/javascript/': [
-				{
-					text: 'javascript',
-					items: [{ text: 'javascript 按钮', link: '/javascript/index.md' }],
-				},
-			],
 			'/study/': [
 				{
-					text: '第一步',
-					items: [{ text: '第一步', link: '/study/index.md' }],
+					text: 'Vue',
+					items: [
+						{ text: 'Vue2的响应式原理', link: '/study/vue/responsive2.md' },
+						{ text: 'Vue3的响应式基础', link: '/study/vue/responseBasic.md' },
+						{ text: 'Vue3的响应式原理', link: '/study/vue/responsive3.md' },
+						{ text: 'Watch 监听', link: '/study/vue/watch.md' },
+						{ text: '路由模式', link: '/study/vue/hash&history.md' },
+						{ text: '混入', link: '/study/vue/Mixins&extends.md' },
+						{ text: 'Vue指令', link: '/study/vue/Vue指令合集.md' },
+					],
 				},
 			],
 			'/component/': [
