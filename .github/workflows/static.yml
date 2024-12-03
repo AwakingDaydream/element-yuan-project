@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: 19.7.0
           cache: npm
-      - run: npm ci
+      - run: npm install
       - name: Build
         run: npm run docs:build
       - uses: actions/configure-pages@v2
