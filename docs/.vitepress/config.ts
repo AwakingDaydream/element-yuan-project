@@ -4,7 +4,7 @@ import { componentPreview, containerPreview } from '@vitepress-demo-preview/plug
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-	base: '/blog/',
+	base: '/element-yuan-project/',
 	title: 'ChinaYuan Project',
 	description: 'A VitePress Site',
 	vite: {
