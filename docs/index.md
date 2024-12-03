@@ -12,10 +12,10 @@ hero:
   actions:
     - theme: brand
       text: 网站初衷
-      link: /markdown-examples
+      link: /origin
     - theme: alt
       text: 随笔
-      link: /api-examples
+      link: /note/index
 
 features:
   - icon: 🧗
