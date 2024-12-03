@@ -28,7 +28,7 @@ export default defineConfig({
 		logo: '/miku.png',
 		nav: [
 			// { text: 'Vue', link: '/vue/index' },
-			{ text: '学习笔记', link: '/study/responsive2' },
+			{ text: '学习笔记', link: '/study/vue/responsive2' },
 			{ text: '组件开发', link: '/component/button' },
 			{ text: '关于我', link: '/aboutme' },
 		],
