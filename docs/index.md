@@ -15,11 +15,11 @@ hero:
       link: /api-examples
 
 features:
-  - title: 指南
-    details: 网站结构
-  - title: 组件
+  - title: Vue 和 Javascript
+    details: 相关的知识整理
+  - title: 组件临摹
     details: 个人组件库的开发
-#  - title: Feature C
-#    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Canvas
+    details: Echarts 和 Canvas 的组件开发
 ---
 
