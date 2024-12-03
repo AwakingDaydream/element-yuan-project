@@ -26,6 +26,9 @@ export default defineConfig({
 	// srcDir: './component',
 	themeConfig: {
 		logo: '/miku.png',
+		search: {
+			provider: 'local',
+		},
 		nav: [
 			// { text: 'Vue', link: '/vue/index' },
 			{ text: '学习笔记', link: '/study/vue/responsive2' },
