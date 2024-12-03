@@ -15,7 +15,8 @@ const members = [
     title: 'Owner',
     links: [
       { icon: 'github', link: 'https://awakingdaydream.github.io/element-yuan-project/' },
-      { icon: 'twitter', link: 'https://awakingdaydream.github.io/element-yuan-project/' }
+      { icon: 'bilibili', link: 'https://awakingdaydream.github.io/element-yuan-project/' },
+      { icon: 'youtube', link: 'https://awakingdaydream.github.io/element-yuan-project/' },
     ]
   }
 ]
