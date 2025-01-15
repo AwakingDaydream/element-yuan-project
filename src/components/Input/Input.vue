@@ -19,7 +19,7 @@
 			<!--prefix-->
 			<span v-if="$slots.prefix" class="vk-input__prefix"><slot name="prefix"></slot></span>
 			<!--content-->
-			<input :disabled="disabled" :type="type" class="vk-input__inner" />
+			<input v-model="innerValue" @input="handleInput" :disabled="disabled" :type="type" class="vk-input__inner" />
 			<!--suffix-->
 			<span v-if="$slots.suffix" class="vk-input__suffix"><slot name="suffix"></slot></span>
 			<!--append-->
@@ -27,18 +27,33 @@
 		</template>
 		<!--textarea-->
 		<template v-else>
-			<textarea class="vk-textarea__wrapper" :disabled="disabled" />
+			<textarea v-model="innerValue" class="vk-textarea__wrapper" :disabled="disabled" />
 		</template>
 	</div>
 </template>
 
 <script setup lang="ts">
-import type { InuptProps } from './types';
+import { ref, watch } from 'vue';
+import type { InuptProps, InuptEmits } from './types';
+
 defineOptions({
 	name: 'VkIcon', //定义组件名
 	inheritAttrs: false, //防止默认透传 默认会加载到跟组件上
 });
-withDefaults(defineProps<InuptProps>(), { type: 'text' });
+const props = withDefaults(defineProps<InuptProps>(), { type: 'text' });
+const emits = defineEmits<InuptEmits>();
+const innerValue = ref(props.modelValue);
+
+watch(
+	() => props.modelValue,
+	(newValue) => {
+		innerValue.value = newValue;
+	}
+);
+
+const handleInput = () => {
+	emits('update:modelValue', innerValue.value);
+};
 </script>
 
 <style scoped lang="scss"></style>
