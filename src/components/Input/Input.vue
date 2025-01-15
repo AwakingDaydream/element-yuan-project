@@ -11,6 +11,7 @@
 			'is-suffix': $slots.suffix,
 		}"
 	>
+		<!--$slots打印没东西，返回的属性值是函数-->
 		<!--input-->
 		<template v-if="type !== 'textarea'">
 			<!--prepend-->

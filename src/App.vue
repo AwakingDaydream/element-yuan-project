@@ -1,4 +1,8 @@
 <template>
+	<Input>
+		<template #suffix> 1 </template>
+		<template #prepend> 1 </template>
+	</Input>
 	<button @click="message1.destory()">销毁</button>
 	<div style="text-align: center">
 		<vkDropdown
@@ -131,6 +135,7 @@ import vkAlert from '@/components/Alert/Alert.vue';
 import { ref, h, onMounted } from 'vue';
 import vkTooltip from '@/components/Tooltip/Tooltip.vue';
 import vkDropdown from '@/components/Dropdown/Dropdown';
+import Input from '@/components/Input/Input.vue';
 import type { TooltipInstance } from '@/components/Tooltip/types';
 import type { Options } from '@popperjs/core';
 import type { MenuOption } from '@/components/Dropdown/types';
