@@ -32,7 +32,14 @@ export default defineConfig({
 		},
 		nav: [
 			// { text: 'Vue', link: '/vue/index' },
-			{ text: '学习笔记', link: '/study/vue/responsive2' },
+			{
+				text: '学习笔记',
+				items: [
+					{ text: 'Javascript', link: '/study/vue/responsive2' },
+					{ text: 'Css', link: '/study/css/deep' },
+					{ text: 'Vue', link: '/study/vue/responsive2' },
+				],
+			},
 			{ text: '组件开发', link: '/component/button' },
 			{ text: '关于我', link: '/aboutme' },
 		],
@@ -43,7 +50,7 @@ export default defineConfig({
 		},
 
 		sidebar: {
-			'/study/': [
+			'/study/vue': [
 				{
 					text: 'Vue',
 					items: [
@@ -55,6 +62,12 @@ export default defineConfig({
 						{ text: '混入', link: '/study/vue/Mixins&extends.md' },
 						{ text: 'Vue指令', link: '/study/vue/Vue指令合集.md' },
 					],
+				},
+			],
+			'/study/css': [
+				{
+					text: 'Css',
+					items: [{ text: '样式隔离', link: '/study/css/deep.md' }],
 				},
 			],
 			'/component/': [

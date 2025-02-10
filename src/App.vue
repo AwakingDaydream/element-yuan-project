@@ -1,5 +1,5 @@
 <template>
-	<Input>
+	<Input v-model="inputValue">
 		<template #suffix> 1 </template>
 		<template #prepend> 1 </template>
 	</Input>
@@ -149,6 +149,7 @@ const manual = ref<any>(false);
 const vkTooltipRef = ref<TooltipInstance>();
 const vkTooltipRef1 = ref<TooltipInstance>();
 const message1 = ref<MessageContext | null>();
+const inputValue = ref<string | null>('1234');
 const popperOptions = ref<Partial<Options>>({
 	placement: 'right',
 	strategy: 'fixed',

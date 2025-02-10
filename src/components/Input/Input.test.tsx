@@ -49,4 +49,6 @@ describe('Input', () => {
 		await wrapper.setProps({ modelValue: 'prop update' });
 		expect(input.element.value).toBe('prop update');
 	});
+
+	//测试清空文本
 });
