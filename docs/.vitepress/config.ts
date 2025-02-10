@@ -54,9 +54,11 @@ export default defineConfig({
 				{
 					text: 'Vue',
 					items: [
-						{ text: 'Vue2的响应式原理', link: '/study/vue/responsive2.md' },
-						{ text: 'Vue3的响应式基础', link: '/study/vue/responseBasic.md' },
-						{ text: 'Vue3的响应式原理', link: '/study/vue/responsive3.md' },
+						{ text: 'MVVM框架', link: '/study/vue/MVVM.md' },
+						{ text: '发布订阅模式', link: '/study/vue/Observe.md' },
+						{ text: '响应式原理（V2）', link: '/study/vue/Responsive2.md' },
+						{ text: '响应式原理（V3）', link: '/study/vue/responsive3.md' },
+						{ text: '响应式基础（V3）', link: '/study/vue/responseBasic.md' },
 						{ text: 'Watch 监听', link: '/study/vue/watch.md' },
 						{ text: '路由模式', link: '/study/vue/hash&history.md' },
 						{ text: '混入', link: '/study/vue/Mixins&extends.md' },

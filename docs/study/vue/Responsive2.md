@@ -1,45 +1,35 @@
-# Vue2响应式原理
-
-## MVVM（Model-View-ViewModel）
-
-主要目的是分离视图View和模型Model、通过双向数据绑定完成数据视图同步更新，view层数据变化，系统自动修改Model层的数据
-
-#### 构成：
-
-model处理业务逻辑和数据封装
-
-view负责界面和现实
-
-ViewModel监听数据改变和控制试图行为，处理交互，把view和model层链接起来，view和model没有直接联系，通过viewmodel进行交互、渲染
-
-![这里写图片描述](https://img-blog.csdn.net/20171030153807325?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdmljdG9yeXpu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+# 响应式原理（V2）
 
 ## 对象的变化侦测
 
 ### 观察者 Watcher
 
-Watcher（观察者）是一个关键的部分，它用于在数据变化时执行更新的操作。其主要作用是在依赖性收集阶段将自己添加到每个相关数据的Dependent（Dep）对象中，并在数据变化时接收到通知，从而触发回调函数。
+::: info 原理
+用于在数据变化时执行更新的操作。其主要作用是在依赖性收集阶段将自己添加到每个相关数据的Dependent（Dep）对象中，并在数据变化时接收到通知，从而触发回调函数。
+:::
 
-主要职责：
-（1）依赖收集： Watcher在初始化时会调用自己的get方法去读取数据，这会触发数据的getter函数从而进行依赖性收集。在getter函数中，当前Watcher实例会被添加到数据对应的Dep实例中。
-（2）执行更新： 当数据发生变化，Dep实例调用notify方法时，Watcher实例会接收到通知，然后调用自己的update方法以触发回调
+#### 主要职责：
+* **依赖收集**： `Watcher`在初始化时会调用自己的get方法去读取数据，这会触发数据的getter函数从而进行依赖性收集。在getter函数中，当前Watcher实例会被添加到数据对应的Dep实例中。
+* **执行更新**： 当数据发生变化，Dep实例调用notify方法时，`Watcher`实例会接收到通知，然后调用自己的update方法以触发回调
 
 ### 依赖Dep
 
+:::info
 Dep（Dependency）是一个核心的类，它负责建立数据和观察者（Watcher）之间的关联（依赖），并提供接口触发它们的更新
+:::
 
-主要职责：
-（1）存储观察者： Dep实例内部维护了一个观察者（Watcher）对象的数组。在依赖收集阶段，观察者对象会被添加到Dep实例的数组中，而在派发更新阶段，Dep类则会遍历这个数组，通知所有的观察者。
-（2）依赖收集： Dep类提供了addSub方法，用于在依赖收集阶段添加新的观察者。当数据的getter函数被调用时，Dep会把当前正在评估的观察者添加到自身的观察者列表中。
-（3）派发更新： Dep类提供了notify方法，用于在数据发生变更时通知所有的观察者。当数据的setter函数被调用时，Dep会遍历自己的观察者列表，并调用它们的update方法
+#### 主要职责：
+* **存储观察者**： Dep实例内部维护了一个观察者（`Watcher`）对象的数组。在依赖收集阶段，观察者对象会被添加到Dep实例的数组中，而在派发更新阶段，Dep类则会遍历这个数组，通知所有的观察者。
+* **依赖收集**： Dep类提供了`addSub`方法，用于在依赖收集阶段添加新的观察者。当数据的getter函数被调用时，Dep会把当前正在评估的观察者添加到自身的观察者列表中。
+* **派发更新**： Dep类提供了`notify`方法，用于在数据发生变更时通知所有的观察者。当数据的setter函数被调用时，Dep会遍历自己的观察者列表，并调用它们的update方法
 
 ### 数据侦测到视图更新
 
 当数据发生变化的时候，侦测到并发出通知
 
-局限性：Object.defineProperty 只能劫持对象的属性，因此Vue 2无法自动侦测到对象属性的添加或删除，以及直接通过索引修改数组项的情况。Vue解决这个问题的方式是提供了全局方法如 Vue.set 和 Vue.delete，以及修改数组时应该使用的一系列方法（如push、splice等）
-
-![image-20241015155657427](/Users/yuanshibo/Library/Application Support/typora-user-images/image-20241015155657427.png)
+::: danger 局限性
+Object.defineProperty 只能劫持对象的属性，因此Vue 2无法自动侦测到对象属性的添加或删除，以及直接通过索引修改数组项的情况。Vue解决这个问题的方式是提供了全局方法如 Vue.set 和 Vue.delete，以及修改数组时应该使用的一系列方法（如push、splice等）
+:::
 
 - **数据劫持**：Data通过Observer转换成getter/setter的形式追踪变化
 
@@ -118,7 +108,7 @@ Dep.prototype.notify = function (){//通知 执行数据更新
 }
 ```
 
-- 当数据发生改变，触发setter像Dep中的依赖发送通知
+- 当数据发生改变，触发setter向Dep中的依赖发送通知
 
 ```javascript
 function Watcher(vm,key,fn){//订阅者
@@ -201,3 +191,61 @@ function replace(fragment,vm){
 ## 数组的变化侦测
 
 用拦截器覆盖Array.prototype，使用array原型上的方法操作数组时，执行拦截器中提供的方法
+
+```js
+//数据的监测方法
+import { def } from "core/util/lang";
+const arrayProto = Array.prototype;
+
+/**
+ * 将数组的每一项进行响应式处理
+ * @param value
+ */
+function observeArray(value) {
+    for (let i = 0, l = value.length; i < l; i++) {
+        observe(value[i]);
+    }
+}
+
+export const arrayMethods = Object.create(arrayProto);// 创建一个新对象，该新对象的原型指向 Array 的原型
+
+const methodsToPatch = [//需要监测的数组方法
+    "push",
+    "pop",
+    "shift",
+    "unshift",
+    "splice",
+    "sort",
+    "reverse",
+];
+
+methodsToPatch.forEach((method) => {
+    // 缓存原始方法
+    const original = arrayProto[method];
+
+    // 定义新方法
+    def(arrayMethods, method, function (...args) {
+        console.log("劫持数组", args);
+        const result = original.apply(this, args);
+        const ob = this.__ob__;
+        let inserted;
+        switch (method) {
+            case "push":
+            case "unshift":
+                inserted = args;
+                break;
+            case "splice":
+                inserted = args.slice(2);
+                break;
+        }
+
+        if (inserted) {
+            ob.observeArray(inserted);
+        }
+
+        // 通知更新
+
+        return result;
+    });
+});
+```
